@@ -14,34 +14,8 @@
     <button id="menu-toggle" class="menu-toggle">
         <i class="fas fa-bars"></i>
     </button>
-    <div class="sidebar">
-        <div class="profile">
-            <img src="<?php echo base_url('assets/images/user.png'); ?>" alt="User Image">
-            <h3>Admin</h3>
-        </div>
-        <ul>
-            <li class="active">
-                <a href="<?php echo base_url('dashboard'); ?>"><i class="fas fa-home"></i> Dashboard</a>
-            </li>
-            <li>
-                <a href="<?php echo base_url('ship'); ?>"><i class="fas fa-ship"></i> Pendataan Kapal</a>
-            </li>
-            <li>
-                <a href="<?php echo base_url('schedule'); ?>"><i class="fas fa-calendar-alt"></i> Jadwal Kapal</a>
-            </li>
-            <li>
-                <a href="<?php echo base_url('cargo'); ?>"><i class="fas fa-box"></i> Aktivitas Bongkar Muat</a>
-            </li>
-            <li>
-                <a href="<?php echo base_url('warehouse'); ?>"><i class="fas fa-warehouse"></i> Manajemen Gudang</a>
-            </li>
-            <li>
-                <a href="logout" style="color: red; text-decoration: none;">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </a>
-            </li>
-        </ul>
-    </div>
+
+    <?php $this->load->view('sidebar'); ?>
 
     <div class="main-content">
         <header>
