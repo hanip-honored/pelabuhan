@@ -6,70 +6,110 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/dashboard.css'); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-    <!-- Sidebar -->
+    <button id="menu-toggle" class="menu-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
     <div class="sidebar">
         <div class="profile">
             <img src="<?php echo base_url('assets/images/user.png'); ?>" alt="User Image">
-            <h3>Tom Holland</h3>
+            <h3>Admin</h3>
         </div>
         <ul>
-            <li class="active"><i class="fas fa-home"></i> Home</li>
-            <li><i class="fas fa-bars"></i> Menu</li>
-            <li><i class="fas fa-newspaper"></i> Articles</li>
-            <li><i class="fas fa-cog"></i> Setting</li>
+            <li class="active">
+                <a href="<?php echo base_url('dashboard'); ?>"><i class="fas fa-home"></i> Dashboard</a>
+            </li>
+            <li>
+                <a href="<?php echo base_url('ship'); ?>"><i class="fas fa-ship"></i> Pendataan Kapal</a>
+            </li>
+            <li>
+                <a href="<?php echo base_url('schedule'); ?>"><i class="fas fa-calendar-alt"></i> Jadwal Kapal</a>
+            </li>
+            <li>
+                <a href="<?php echo base_url('cargo'); ?>"><i class="fas fa-box"></i> Aktivitas Bongkar Muat</a>
+            </li>
+            <li>
+                <a href="<?php echo base_url('warehouse'); ?>"><i class="fas fa-warehouse"></i> Manajemen Gudang</a>
+            </li>
             <li>
                 <a href="logout" style="color: red; text-decoration: none;">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </a>
             </li>
         </ul>
-        <div class="faster-delivery">
-            <img src="<?php echo base_url('assets/images/delivery.png'); ?>" alt="Delivery">
-            <p>Faster Delivery</p>
-            <a href="#">Learn More</a>
-        </div>
     </div>
 
-    <!-- Main Content -->
     <div class="main-content">
         <header>
-            <h2>Welcome to Eatland 🍔</h2>
+            <h2>Dashboard Admin</h2>
+            <p>Selamat datang di Sistem Manajemen Pelabuhan</p>
         </header>
-        <div class="filter-section">
-            <h3>All Item</h3>
-            <div class="categories">
-                <span>All</span>
-                <span>Burger</span>
-                <span>Pizza</span>
-                <span>Mutton</span>
-                <span>Chicken</span>
-                <span>Fish</span>
+
+        <!-- Visualisasi Data -->
+        <div class="container mt-4">
+            <div class="row">
+                <!-- Card Setengah Halaman -->
+                <div class="col-lg-6 col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-primary">Visualisasi Data Gudang</h5>
+                            <div class="charts-container d-flex flex-wrap justify-content-center">
+                                <?php foreach ($ketersediaan_gudang as $index => $gudang): ?>
+                                    <div class="chart-item m-3">
+                                        <!-- Canvas untuk Chart -->
+                                        <canvas id="chartGudang<?php echo $index; ?>" style="width: 100%; height: auto;"></canvas>
+                                        <p class="text-center mt-2">Gudang <?php echo $gudang->lokasi_gudang ?></p>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Item List -->
-        <div class="item-list">
-            <div class="item-card">
-                <img src="<?php echo base_url('assets/images/fish.png'); ?>" alt="Fish Tomato">
-                <h4>Fish Tomato</h4>
-                <p>Lorem ipsum is the most popular dummy text.</p>
-                <span>$39</span>
-            </div>
-            <div class="item-card">
-                <img src="<?php echo base_url('assets/images/salmon.png'); ?>" alt="Salmon">
-                <h4>Salmon</h4>
-                <p>Lorem ipsum is the most popular dummy text.</p>
-                <span>$56</span>
-            </div>
-            <div class="item-card">
-                <img src="<?php echo base_url('assets/images/chicken.png'); ?>" alt="Chicken">
-                <h4>Chicken</h4>
-                <p>Lorem ipsum is the most popular dummy text.</p>
-                <span>$64</span>
-            </div>
-        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            const dataGudang = <?php echo json_encode($ketersediaan_gudang); ?>; // Data PHP dari server
+
+            dataGudang.forEach((gudang, index) => {
+                const ctx = document.getElementById(`chartGudang${index}`).getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Ruang Terisi', 'Ruang Kosong'],
+                        datasets: [{
+                            data: [gudang.total_logistik, gudang.sisa_kapasitas],
+                            backgroundColor: ['rgba(255, 99, 132, 0.6)', 'rgba(54, 162, 235, 0.6)'],
+                            borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                position: 'top'
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        const value = context.raw;
+                                        return `${context.label}: ${value}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
     </div>
+
+    <script src="<?php echo base_url('assets/js/dashboard.js'); ?>"></script>
 </body>
 </html>

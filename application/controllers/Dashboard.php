@@ -8,10 +8,12 @@ class Dashboard extends CI_Controller {
         if (!$this->session->userdata('id_user')) {
             redirect('login');
         }
+        $this->load->model('Gudang_model');
     }
 
     public function index() {
-        $this->load->view('dashboard/index');
+        $data['ketersediaan_gudang'] = $this->Gudang_model->getKetersediaanGudang();
+        $this->load->view('dashboard/index', $data);
     }
 
 }
