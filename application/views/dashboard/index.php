@@ -69,6 +69,38 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-primary">Status Kapal</h5>
+                            <ul class="list-group col-md-12">
+                                <?php foreach ($status_kapal as $index => $kapal): ?>
+                                    <?php
+                                        $warnaStatus = '';
+                                        if ($kapal->status_kapal === 'Sedang bongkar muat') {
+                                            $warnaStatus = 'text-warning';
+                                        } elseif ($kapal->status_kapal === 'Masuk') {
+                                            $warnaStatus = 'text-success';
+                                        } elseif ($kapal->status_kapal === 'Keluar') {
+                                            $warnaStatus = 'text-danger';
+                                        }
+                                    ?>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center col-md-12">
+                                        <div class="d-flex align-items-center">
+                                            <div class="ml-3">
+                                                <h6 class="mb-0"><?php echo $kapal->nama_kapal; ?></h6>
+                                                <small><?php echo $kapal->jenis_kapal; ?></small>
+                                            </div>
+                                        </div>
+                                        <div class="text-end">
+                                            <h6 class="mb-0 <?php echo $warnaStatus; ?>"><?php echo $kapal->status_kapal; ?></h6>
+                                        </div>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

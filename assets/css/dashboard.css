@@ -137,12 +137,12 @@ header p {
 }
 
 .chart-item {
-    width: 200px; /* Ukuran tiap chart */
+    width: 200px;
     text-align: center;
 }
 
 .chart-item canvas {
-    width: 100%; /* Membuat chart responsif */
+    width: 100%;
     height: auto;
 }
 

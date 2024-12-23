@@ -9,9 +9,11 @@ class Dashboard extends CI_Controller {
             redirect('login');
         }
         $this->load->model('Gudang_model');
+        $this->load->model('Kapal_model');
     }
 
     public function index() {
+        $data['status_kapal'] = $this->Kapal_model->getStatusKapal();
         $data['ketersediaan_gudang'] = $this->Gudang_model->getKetersediaanGudang();
         $this->load->view('dashboard/index', $data);
     }
