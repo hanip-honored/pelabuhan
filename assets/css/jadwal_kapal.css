@@ -1,0 +1,98 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+}
+
+.calendar {
+    margin-bottom: 20px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.calendar-days,
+.calendar-dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-days div {
+    font-weight: bold;
+    text-align: center;
+    color: #555;
+}
+
+.calendar-dates div {
+    text-align: center;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.calendar-dates div:hover {
+    background-color: #e0e0e0;
+}
+
+.calendar-dates .has-schedule {
+    background-color: #007bff;
+    color: white;
+}
+
+.schedule-form {
+    margin-top: 20px;
+}
+
+.schedule-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.schedule-form label {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.schedule-form input,
+.schedule-form select,
+.schedule-form button {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.schedule-form button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+.schedule-form button:hover {
+    background-color: #0056b3;
+}

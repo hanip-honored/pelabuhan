@@ -11,5 +11,8 @@ class Kapal_model extends CI_Model {
     public function getStatusKapal() {
         return $this->db->get('kapal')->result();
     }
-
+    
+    public function getDataKapal() {
+        return $this->db->get('kapal')->result();
+    }
 }
