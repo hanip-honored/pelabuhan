@@ -1,69 +1,79 @@
-const calendarDates = document.getElementById('calendar-dates');
-const monthYear = document.getElementById('month-year');
-const prevMonth = document.getElementById('prev-month');
-const nextMonth = document.getElementById('next-month');
-const scheduleForm = document.getElementById('schedule-form');
-
+const calendarDates = document.getElementById("calendar-dates");
+const monthYear = document.getElementById("month-year");
 let currentDate = new Date();
-let schedules = [];
 
-function renderCalendar(date) {
-    calendarDates.innerHTML = '';
-    const year = date.getFullYear();
-    const month = date.getMonth();
+function generateCalendar(date) {
+    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+    const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
 
-    monthYear.textContent = `${date.toLocaleString('default', { month: 'long' })} ${year}`;
+    calendarDates.innerHTML = "";
 
-    const firstDay = new Date(year, month, 1).getDay();
-    const lastDate = new Date(year, month + 1, 0).getDate();
-
+    // Fill empty slots before the first day
     for (let i = 0; i < firstDay; i++) {
-        calendarDates.innerHTML += '<div></div>';
+        const emptyDiv = document.createElement("div");
+        calendarDates.appendChild(emptyDiv);
     }
 
-    for (let day = 1; day <= lastDate; day++) {
-        const div = document.createElement('div');
-        div.textContent = day;
-
-        const scheduleDate = schedules.find(
-            (schedule) => new Date(schedule.startTime).toDateString() === new Date(year, month, day).toDateString()
-        );
-
-        if (scheduleDate) {
-            div.classList.add('has-schedule');
-        }
-
-        calendarDates.appendChild(div);
+    // Fill days of the month
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dayDiv = document.createElement("div");
+        dayDiv.textContent = day;
+        dayDiv.dataset.date = new Date(date.getFullYear(), date.getMonth(), day).toISOString();
+        calendarDates.appendChild(dayDiv);
     }
+
+    monthYear.textContent = date.toLocaleString("default", { month: "long", year: "numeric" });
 }
 
-scheduleForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+document.getElementById("prev-month").addEventListener("click", () => {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    generateCalendar(currentDate);
+    highlightRange();
+});
 
-    const shipName = document.getElementById('ship-name').value;
-    const startTime = document.getElementById('start-time').value;
-    const endTime = document.getElementById('end-time').value;
-    const operationType = document.getElementById('operation-type').value;
+document.getElementById("next-month").addEventListener("click", () => {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    generateCalendar(currentDate);
+    highlightRange();
+});
 
-    schedules.push({
-        shipName,
-        startTime,
-        endTime,
-        operationType,
+// Highlight range based on start and end dates
+function highlightRange() {
+    const startTimeValue = document.getElementById("start-time").value;
+    const endTimeValue = document.getElementById("end-time").value;
+
+    // Clear all highlights
+    const dayElements = calendarDates.querySelectorAll("div");
+    dayElements.forEach((day) => {
+        day.classList.remove("selected", "in-range");
     });
 
-    renderCalendar(currentDate);
-    alert('Jadwal berhasil ditambahkan!');
+    if (!startTimeValue) return;
+
+    const startTime = new Date(startTimeValue);
+    const endTime = endTimeValue ? new Date(endTimeValue) : null;
+
+    dayElements.forEach((day) => {
+        const dayDate = new Date(day.dataset.date);
+
+        if (dayDate.toDateString() === startTime.toDateString()) {
+            // Highlight only the start date
+            day.classList.add("selected");
+        } else if (endTime && dayDate >= startTime && dayDate <= endTime) {
+            // Highlight range if end date is selected
+            day.classList.add("in-range");
+        }
+    });
+}
+
+// Event listeners for start and end time inputs
+document.getElementById("start-time").addEventListener("change", () => {
+    highlightRange();
 });
 
-prevMonth.addEventListener('click', () => {
-    currentDate.setMonth(currentDate.getMonth() - 1);
-    renderCalendar(currentDate);
+document.getElementById("end-time").addEventListener("change", () => {
+    highlightRange();
 });
 
-nextMonth.addEventListener('click', () => {
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    renderCalendar(currentDate);
-});
-
-renderCalendar(currentDate);
+// Initialize calendar
+generateCalendar(currentDate);
