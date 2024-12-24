@@ -76,6 +76,46 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-8 mt-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title text-left text-primary">Ringkasan Operasional</h5>
+                            <p class="text-left fs-6 mb-2">Periode: <?php echo get_periode(); ?></p>
+                            <div class="d-flex justify-content-between">
+                                <div class="text-center">
+                                    <div class="icon-container" style="background-color: #e3f2fd; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-chart-line text-primary"></i>
+                                    </div>
+                                    <p class="mt-2 mb-0">Sales</p>
+                                    <h6 class="text-primary">245k</h6>
+                                </div>
+                                <div class="text-center">
+                                    <div class="icon-container" style="background-color: #e8f5e9; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-user text-success"></i>
+                                    </div>
+                                    <p class="mt-2 mb-0">Customers</p>
+                                    <h6 class="text-success">12.5k</h6>
+                                </div>
+                                <div class="text-center">
+                                    <div class="icon-container" style="background-color: #fff3e0; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-box text-warning"></i>
+                                    </div>
+                                    <p class="mt-2 mb-0">Products</p>
+                                    <h6 class="text-warning">1.54k</h6>
+                                </div>
+                                <div class="text-center">
+                                    <div class="icon-container" style="background-color: #e0f7fa; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-dollar-sign text-info"></i>
+                                    </div>
+                                    <p class="mt-2 mb-0">Revenue</p>
+                                    <h6 class="text-info">$88k</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
