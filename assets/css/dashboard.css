@@ -146,3 +146,40 @@ header p {
     height: auto;
 }
 
+.temp-icon-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Jarak antara ikon dan suhu */
+}
+
+.temp-icon-container img {
+    margin-right: 20px; /* Atur jarak antara ikon cuaca dan suhu */
+}
+
+.temp-icon-container .temp-day-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.temp-day {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Jarak antara suhu dan hari */
+}
+
+.temp-icon-container h1 {
+    margin: 0;
+}
+
+.temp-icon-container h4 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #7f8c8d;
+}
+
+.temp-icon-container p {
+    margin: 0;
+    font-size: 1rem;
+    color: #7f8c8d;
+}

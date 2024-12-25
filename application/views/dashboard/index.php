@@ -31,7 +31,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title text-center text-primary">Visualisasi Data Gudang</h5>
-                            <div class="charts-container d-flex flex-wrap justify-content-center">
+                            <div class="charts-container d-flex flex-wrap justify-content-center mt-2" style="height: 300px;">
                                 <?php foreach ($ketersediaan_gudang as $index => $gudang): ?>
                                     <div class="chart-item m-3">
                                         <!-- Canvas untuk Chart -->
@@ -77,41 +77,61 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-8 mt-4">
+                <div class="col-lg-6 mt-4">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title text-left text-primary">Ringkasan Operasional</h5>
-                            <p class="text-left fs-6 mb-2">Periode: <?php echo get_periode(); ?></p>
+                            <p class="text-left fs-6 mb-2">Periode <?php echo get_periode(); ?></p>
                             <div class="d-flex justify-content-between">
                                 <div class="text-center">
-                                    <div class="icon-container" style="background-color: #e3f2fd; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
-                                        <i class="fas fa-chart-line text-primary"></i>
+                                    <div class="icon-container" style="background-color: #e0f7fa; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-user text-info"></i>
                                     </div>
-                                    <p class="mt-2 mb-0">Sales</p>
-                                    <h6 class="text-primary">245k</h6>
+                                    <p class="mt-2 mb-0">User</p>
+                                    <h6 class="text-info"><?php echo $operasional['user'] ?></h6>
+                                </div>
+                                <div class="text-center">
+                                    <div class="icon-container" style="background-color: #e3f2fd; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
+                                        <i class="fas fa-ship text-primary"></i>
+                                    </div>
+                                    <p class="mt-2 mb-0">Kapal</p>
+                                    <h6 class="text-primary"><?php echo $operasional['kapal'] ?></h6>
                                 </div>
                                 <div class="text-center">
                                     <div class="icon-container" style="background-color: #e8f5e9; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
-                                        <i class="fas fa-user text-success"></i>
+                                        <i class="fas fa-box text-success"></i>
                                     </div>
-                                    <p class="mt-2 mb-0">Customers</p>
-                                    <h6 class="text-success">12.5k</h6>
+                                    <p class="mt-2 mb-0">Logistik</p>
+                                    <h6 class="text-success"><?php echo $operasional['logistik'] ?></h6>
                                 </div>
                                 <div class="text-center">
                                     <div class="icon-container" style="background-color: #fff3e0; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
-                                        <i class="fas fa-box text-warning"></i>
+                                        <i class="fas fa-warehouse text-warning"></i>
                                     </div>
-                                    <p class="mt-2 mb-0">Products</p>
-                                    <h6 class="text-warning">1.54k</h6>
-                                </div>
-                                <div class="text-center">
-                                    <div class="icon-container" style="background-color: #e0f7fa; border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;">
-                                        <i class="fas fa-dollar-sign text-info"></i>
-                                    </div>
-                                    <p class="mt-2 mb-0">Revenue</p>
-                                    <h6 class="text-info">$88k</h6>
+                                    <p class="mt-2 mb-0">Gudang</p>
+                                    <h6 class="text-warning"><?php echo $operasional['gudang'] ?></h6>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 mt-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-primary">Cuaca</h5>
+                            <div class="temp-icon-container">
+                                <img id="weather-icon" src="" alt="Weather Icon" style="width: 100px; height: 70px;">
+                                <div class="temp-day-container">
+                                    <div class="temp-day">
+                                        <p id="temperature" class="display-1 text-primary">--°</p>
+                                        <p id="day" class="text-secondary">Day</p>
+                                    </div>
+                                    <p id="location" class="text-muted">City, Country</p>
+                                </div>
+                            </div>
+                            <p id="wind-speed"></p>
+                            <p id="pressure"></p>
+                            <p id="wind-direction"></p>
                         </div>
                     </div>
                 </div>
@@ -156,6 +176,6 @@
         </script>
     </div>
 
-    <script src="<?php echo base_url('assets/js/dashboard.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/dashboard.js'); ?>" defer></script>
 </body>
 </html>

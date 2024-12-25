@@ -3,7 +3,7 @@
 <div class="sidebar">
     <div class="profile">
         <img src="<?php echo base_url('assets/images/user.png'); ?>" alt="User Image">
-        <h3>Admin</h3>
+        <h3><?php echo ucwords($_SESSION['level']) ?></h3>
     </div>
     <ul>
         <li class="<?php echo ($this->uri->segment(1) == 'dashboard') ? 'active' : ''; ?>">

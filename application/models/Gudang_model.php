@@ -12,4 +12,7 @@ class Gudang_model extends CI_Model {
         return $this->db->get('ketersediaan_gudang')->result();
     }
 
+    public function getTotalGudang() {
+        return $this->db->count_all('gudang');
+    }
 }

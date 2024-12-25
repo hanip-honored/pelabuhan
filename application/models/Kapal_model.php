@@ -7,12 +7,12 @@ class Kapal_model extends CI_Model {
         parent::__construct();
         $this->load->database();
     }
-
-    public function getStatusKapal() {
-        return $this->db->get('kapal')->result();
-    }
     
     public function getDataKapal() {
         return $this->db->get('kapal')->result();
+    }
+
+    public function getTotalKapal() {
+        return $this->db->count_all('kapal');
     }
 }
