@@ -15,8 +15,8 @@
         <li class="<?php echo ($this->uri->segment(1) == 'jadwal_kapal') ? 'active' : ''; ?>">
             <a href="jadwal_kapal"><i class="fas fa-calendar-alt"></i> Jadwal Kapal</a>
         </li>
-        <li class="<?php echo ($this->uri->segment(1) == 'cargo') ? 'active' : ''; ?>">
-            <a href="cargo"><i class="fas fa-box"></i> Aktivitas Bongkar Muat</a>
+        <li class="<?php echo ($this->uri->segment(1) == 'aktivitas_bongkar_muat') ? 'active' : ''; ?>">
+            <a href="aktivitas_bongkar_muat"><i class="fas fa-box"></i> Aktivitas Bongkar Muat</a>
         </li>
         <li class="<?php echo ($this->uri->segment(1) == 'manajemen_gudang') ? 'active' : ''; ?>">
             <a href="manajemen_gudang"><i class="fas fa-warehouse"></i> Manajemen Gudang</a>
