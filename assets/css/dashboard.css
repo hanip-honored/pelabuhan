@@ -19,6 +19,10 @@ h2, h3, h4, p {
     padding: 20px;
     display: flex;
     flex-direction: column;
+    position: fixed; /* Membuat sidebar tetap di tempat */
+    top: 0; /* Menempel di bagian atas halaman */
+    left: 0; /* Menempel di bagian kiri halaman */
+    z-index: 1000;
 }
 
 .profile {
@@ -73,6 +77,7 @@ ul li a i {
 
 /* Main Content */
 .main-content {
+    margin-left: 280px;
     flex: 1;
     padding: 30px;
     background-color: #F4F5FA;

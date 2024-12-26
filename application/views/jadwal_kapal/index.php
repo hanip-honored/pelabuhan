@@ -12,46 +12,48 @@
 </head>
 <body>
     <?php $this->load->view('sidebar'); ?>
-    <div class="container">
-        <h1>Penjadwalan Kapal</h1>
-
-        <!-- Kalender -->
-        <div class="calendar">
-            <div class="calendar-header">
-                <button id="prev-month" class="btn-small">&lt;</button>
-                <h2 id="month-year">December 2024</h2>
-                <button id="next-month" class="btn-small">&gt;</button>
+    <div class="main-content">
+        <div class="container">
+            <h1>Penjadwalan Kapal</h1>
+    
+            <!-- Kalender -->
+            <div class="calendar">
+                <div class="calendar-header">
+                    <button id="prev-month" class="btn-small">&lt;</button>
+                    <h2 id="month-year">December 2024</h2>
+                    <button id="next-month" class="btn-small">&gt;</button>
+                </div>
+                <div class="calendar-days">
+                    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+                </div>
+                <div class="calendar-dates" id="calendar-dates">
+                    <!-- Tanggal akan dihasilkan secara dinamis -->
+                </div>
             </div>
-            <div class="calendar-days">
-                <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+    
+            <!-- Form Tambah Jadwal -->
+            <div class="schedule-form">
+                <h2>Tambah Jadwal</h2>
+                <form id="schedule-form">
+                    <label for="ship-name">Nama Kapal</label>
+                    <input type="text" id="ship-name" placeholder="Masukkan nama kapal" required>
+    
+                    <label for="start-time">Waktu Mulai</label>
+                    <input type="datetime-local" id="start-time" required>
+    
+                    <label for="end-time">Waktu Selesai</label>
+                    <input type="datetime-local" id="end-time" required>
+    
+                    <label for="operation-type">Jenis Operasi</label>
+                    <select id="operation-type" required>
+                        <option value="bongkar muat">Bongkar Muat</option>
+                        <option value="pemeriksaan">Pemeriksaan</option>
+                        <option value="perawatan">Perawatan</option>
+                    </select>
+    
+                    <button type="submit" class="btn">Tambah Jadwal</button>
+                </form>
             </div>
-            <div class="calendar-dates" id="calendar-dates">
-                <!-- Tanggal akan dihasilkan secara dinamis -->
-            </div>
-        </div>
-
-        <!-- Form Tambah Jadwal -->
-        <div class="schedule-form">
-            <h2>Tambah Jadwal</h2>
-            <form id="schedule-form">
-                <label for="ship-name">Nama Kapal</label>
-                <input type="text" id="ship-name" placeholder="Masukkan nama kapal" required>
-
-                <label for="start-time">Waktu Mulai</label>
-                <input type="datetime-local" id="start-time" required>
-
-                <label for="end-time">Waktu Selesai</label>
-                <input type="datetime-local" id="end-time" required>
-
-                <label for="operation-type">Jenis Operasi</label>
-                <select id="operation-type" required>
-                    <option value="bongkar muat">Bongkar Muat</option>
-                    <option value="pemeriksaan">Pemeriksaan</option>
-                    <option value="perawatan">Perawatan</option>
-                </select>
-
-                <button type="submit" class="btn">Tambah Jadwal</button>
-            </form>
         </div>
     </div>
 
