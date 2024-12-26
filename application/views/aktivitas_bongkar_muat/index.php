@@ -15,11 +15,19 @@
     <div class="main-content">
         <div class="container mt-5">
             <h1 class="text-center mb-4">Aktivitas Bongkar Muat</h1>
-            <a href="<?php echo base_url('activity/add'); ?>" class="btn btn-success mb-3">+ Tambah Aktivitas</a>
+            <a href="<?php echo base_url('activity/add'); ?>" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Aktivitas</a>
+
+            <form action="aktivitas_bongkar_muat/search" method="get" class="mb-3">
+                <div class="input-group">
+                    <input type="text" name="keyword" class="form-control" placeholder="Cari aktivitas..." value="<?php echo isset($keyword) ? $keyword : ''; ?>">
+                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Cari</button>
+                </div>
+            </form>
+
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>ID Logistik</th>
+                        <th>No</th>
                         <th>Nama Kapal</th>
                         <th>Jenis Barang</th>
                         <th>Jumlah Barang</th>
@@ -28,20 +36,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if (isset($activities) && !empty($activities)): ?>
+                    <?php $no = 1; 
+                        if (isset($activities) && !empty($activities)): ?>
                         <?php foreach ($activities as $activity): ?>
                             <tr>
-                                <td><?php echo $activity->id_logistik; ?></td>
+                                <td><?php echo $no ?></td>
                                 <td><?php echo $activity->nama_kapal; ?></td>
                                 <td><?php echo $activity->jenis_barang; ?></td>
                                 <td><?php echo $activity->jumlah_barang; ?></td>
                                 <td><?php echo $activity->status_logistik; ?></td>
                                 <td>
-                                    <a href="<?php echo base_url('activity/edit/' . $activity->id_logistik); ?>" class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="<?php echo base_url('activity/delete/' . $activity->id_logistik); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Hapus aktivitas ini?')">Hapus</a>
+                                    <a href="Aktivitas_Bongkar_muat/editData?id=<?php echo $activity->id_logistik ?>" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                    <a href="<?php echo base_url('activity/delete/' . $activity->id_logistik); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Hapus aktivitas ini?')"><i class="fas fa-trash"></i> Hapus</a>
                                 </td>
                             </tr>
-                        <?php endforeach; ?>
+                        <?php $no++; endforeach; ?>
                     <?php else: ?>
                         <tr>
                             <td colspan="6" class="text-center">Tidak ada data aktivitas bongkar muat.</td>
