@@ -8,12 +8,21 @@ class Aktivitas_model extends CI_Model {
         $this->load->database();
     }
 
-    public function getAllData() {
+    public function getAllData($keyword = null) {
         $this->db->select('logistik.*, kapal.nama_kapal');
         $this->db->from('logistik');
         $this->db->join('kapal', 'logistik.id_kapal = kapal.id_kapal');
+        
+        if (!empty($keyword)) {
+            $this->db->like('logistik.nama_logistik', $keyword);
+            $this->db->or_like('kapal.nama_kapal', $keyword);
+            $this->db->or_like('logistik.jenis_logistik', $keyword);
+            $this->db->or_like('logistik.jenis_logistik', $keyword);
+        }
+        
         return $this->db->get()->result();
     }
+    
 
     public function getActivityById($id) {
         $this->db->select('logistik.*, kapal.nama_kapal');

@@ -8,13 +8,15 @@ class Aktivitas_Bongkar_Muat extends CI_Controller {
         if (!$this->session->userdata('id_user')) {
             redirect('login');
         }
-        $this->load->model('Gudang_model');
         $this->load->model('Aktivitas_model');
     }
 
     public function index() {
-        $data['ketersediaan_gudang'] = $this->Gudang_model->getKetersediaanGudang();
-        $data['activities'] = $this->Aktivitas_model->getAllData();
+        $keyword = $this->input->get('keyword');
+        
+        $data['activities'] = $this->Aktivitas_model->getAllData($keyword);
+        $data['keyword'] = $keyword;
+
         $this->load->view('aktivitas_bongkar_muat/index', $data);
     }
 

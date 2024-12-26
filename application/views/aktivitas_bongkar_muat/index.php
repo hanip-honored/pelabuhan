@@ -17,7 +17,7 @@
             <h1 class="text-center mb-4">Aktivitas Bongkar Muat</h1>
             <a href="<?php echo base_url('activity/add'); ?>" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Aktivitas</a>
 
-            <form action="aktivitas_bongkar_muat/search" method="get" class="mb-3">
+            <form action="aktivitas_bongkar_muat" method="get" class="mb-3">
                 <div class="input-group">
                     <input type="text" name="keyword" class="form-control" placeholder="Cari aktivitas..." value="<?php echo isset($keyword) ? $keyword : ''; ?>">
                     <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Cari</button>
