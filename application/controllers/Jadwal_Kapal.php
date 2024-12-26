@@ -8,11 +8,11 @@ class Jadwal_Kapal extends CI_Controller {
         if (!$this->session->userdata('id_user')) {
             redirect('login');
         }
-        $this->load->model('Gudang_model');
+        $this->load->model('Jadwal_model');
     }
 
     public function index() {
-        $data['ketersediaan_gudang'] = $this->Gudang_model->getKetersediaanGudang();
+        $data['jadwal_kapal'] = $this->Jadwal_model->getDataKapal();
         $this->load->view('jadwal_kapal/index', $data);
     }
 
