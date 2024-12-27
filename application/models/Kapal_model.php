@@ -9,6 +9,8 @@ class Kapal_model extends CI_Model {
     }
     
     public function getDataKapal() {
+        $this->db->order_by('id_kapal', 'DESC');
+        $this->db->limit(4);
         return $this->db->get('kapal')->result();
     }
 
