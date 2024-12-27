@@ -1,4 +1,4 @@
-function setEditData(ship) {
+function setEditData(jadwal) {
   document.getElementById('edit_id_kapal').value = ship.id_kapal;
   document.getElementById('edit_nama_kapal').value = ship.nama_kapal;
   document.getElementById('edit_jenis_kapal').value = ship.jenis_kapal;
