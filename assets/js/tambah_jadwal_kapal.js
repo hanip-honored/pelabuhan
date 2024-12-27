@@ -25,6 +25,27 @@ function generateCalendar(date) {
     monthYear.textContent = date.toLocaleString("default", { month: "long", year: "numeric" });
 }
 
+function highlightRange() {
+    const startTime = new Date(document.getElementById("start-time").value || null);
+    const endTime = new Date(document.getElementById("end-time").value || null);
+
+    const dayElements = calendarDates.querySelectorAll("div");
+    dayElements.forEach((day) => {
+        const dayDate = new Date(day.dataset.date || null);
+        day.classList.remove("selected", "in-range");
+
+        if (dayDate.toDateString() === startTime.toDateString()) {
+            day.classList.add("selected");
+        } else if (endTime && dayDate >= startTime && dayDate <= endTime) {
+            day.classList.add("in-range");
+        }
+    });
+}
+
+// Event listeners
+document.getElementById("start-time").addEventListener("change", highlightRange);
+document.getElementById("end-time").addEventListener("change", highlightRange);
+
 document.getElementById("prev-month").addEventListener("click", () => {
     currentDate.setMonth(currentDate.getMonth() - 1);
     generateCalendar(currentDate);
@@ -37,43 +58,5 @@ document.getElementById("next-month").addEventListener("click", () => {
     highlightRange();
 });
 
-// Highlight range based on start and end dates
-function highlightRange() {
-    const startTimeValue = document.getElementById("start-time").value;
-    const endTimeValue = document.getElementById("end-time").value;
-
-    // Clear all highlights
-    const dayElements = calendarDates.querySelectorAll("div");
-    dayElements.forEach((day) => {
-        day.classList.remove("selected", "in-range");
-    });
-
-    if (!startTimeValue) return;
-
-    const startTime = new Date(startTimeValue);
-    const endTime = endTimeValue ? new Date(endTimeValue) : null;
-
-    dayElements.forEach((day) => {
-        const dayDate = new Date(day.dataset.date);
-
-        if (dayDate.toDateString() === startTime.toDateString()) {
-            // Highlight only the start date
-            day.classList.add("selected");
-        } else if (endTime && dayDate >= startTime && dayDate <= endTime) {
-            // Highlight range if end date is selected
-            day.classList.add("in-range");
-        }
-    });
-}
-
-// Event listeners for start and end time inputs
-document.getElementById("start-time").addEventListener("change", () => {
-    highlightRange();
-});
-
-document.getElementById("end-time").addEventListener("change", () => {
-    highlightRange();
-});
-
-// Initialize calendar
+// Initialize
 generateCalendar(currentDate);

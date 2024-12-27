@@ -15,10 +15,11 @@
 <div class="main-content">
     <div class="container p-2">
         <h1 class="text-center mb-4 mt-2">Jadwal Kapal</h1>
-        <button class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#addModal">+ Tambah Jadwal</button>
+        <a href="jadwal_kapal/tambah" class="btn btn-success mb-4">+ Tambah Jadwal</a>
         <table class="table table-bordered table-hover table-striped">
             <thead class="table-light">
                 <tr>
+                    <th>No</th>
                     <th>Nama Kapal</th>
                     <th>Status Alur</th>
                     <th>Waktu Masuk</th>
@@ -28,22 +29,27 @@
                 </tr>
             </thead>
             <tbody>
+                <?php $no = 1;?>
                 <?php foreach ($jadwal_kapal as $jadwal): ?>
                 <tr>
+                    <td><?php echo $no++;?></td>
                     <td><?php echo $jadwal->nama_kapal; ?></td>
                     <td><?php echo $jadwal->status_alur; ?></td>
                     <td><?php echo $jadwal->waktu_masuk; ?></td>
                     <td><?php echo $jadwal->waktu_keluar; ?></td>
+                    <td><?php echo $jadwal->jenis_operasi; ?></td>
                     <td>
                         <a href="#" class="btn btn-warning btn-sm" 
-                           data-bs-toggle="modal" 
-                           data-bs-target="#editModal" 
-                           onclick="setEditData(<?php echo htmlspecialchars(json_encode($jadwal), ENT_QUOTES, 'UTF-8'); ?>)">
-                           Edit
+                        data-bs-toggle="modal" 
+                        data-bs-target="#editModal" 
+                        onclick="setEditData(<?php echo htmlspecialchars(json_encode($jadwal), ENT_QUOTES, 'UTF-8'); ?>)">
+                        Edit
                         </a>
+                        <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $jadwal->id_jadwal; ?>">Hapus</button>
                     </td>
                 </tr>
 
+                <!-- Modal Konfirmasi Hapus -->
                 <div class="modal fade" id="deleteModal<?php echo $jadwal->id_jadwal; ?>" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -64,46 +70,6 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-    </div>
-</div>
-
-<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addModalLabel">Tambah Jadwal Kapal</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="<?php echo base_url('jadwal_kapal/tambah'); ?>" method="post">
-                    <div class="mb-3">
-                        <label for="nama_kapal" class="form-label">Nama Kapal</label>
-                        <input type="text" class="form-control" id="nama_kapal" name="nama_kapal" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="status_alur" class="form-label">Status Alur</label>
-                        <input type="text" class="form-control" id="status_alur" name="status_alur" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="waktu_masuk" class="form-label">Waktu Masuk</label>
-                        <input type="datetime-local" class="form-control" id="waktu_masuk" name="waktu_masuk" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="waktu_keluar" class="form-label">Waktu Keluar</label>
-                        <input type="datetime-local" class="form-control" id="waktu_keluar" name="waktu_keluar" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="pelabuhan_asal" class="form-label">Pelabuhan Asal</label>
-                        <input type="text" class="form-control" id="pelabuhan_asal" name="pelabuhan_asal" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="pelabuhan_tujuan" class="form-label">Pelabuhan Tujuan</label>
-                        <input type="text" class="form-control" id="pelabuhan_tujuan" name="pelabuhan_tujuan" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Simpan Jadwal</button>
-                </form>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -147,5 +113,6 @@
         </div>
     </div>
 </div>
+<script src="<?php echo base_url('assets/js/jadwal_kapal.js'); ?>"></script>
 </body>
 </html>

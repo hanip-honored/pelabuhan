@@ -1,52 +1,126 @@
-body {
-    font-family: Arial, sans-serif;
+h2, h3, h4, p {
     margin: 0;
-    padding: 0;
-    background-color: #f4f6f9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+}
+
+.sidebar {
+    width: 280px;
+    background-color: #F4F5FA;
     height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    position: fixed; /* Membuat sidebar tetap di tempat */
+    top: 0; /* Menempel di bagian atas halaman */
+    left: 0; /* Menempel di bagian kiri halaman */
+    z-index: 1000;
 }
 
-.container {
-    width: 90%;
-    max-width: 500px; /* Membatasi lebar kontainer */
-    background: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-h1 {
-    font-size: 18px; /* Ukuran font lebih kecil */
+.profile {
     text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile img {
+    width: 80px;
+    border-radius: 50%;
+    border: 2px solid #ff8a80;
     margin-bottom: 10px;
+}
+
+.profile h3 {
+    font-size: 18px;
+    color: #ff8a80;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul li {
+    margin-bottom: 15px;
+}
+
+ul li a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: background-color 0.3s, color 0.3s;
     color: #333;
 }
 
+ul li.active a, ul li a:hover {
+    background-color: #ff8a80;
+    color: white;
+}
+
+ul li a i {
+    font-size: 18px;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #F4F5FA;
+    display: flex;
+    color: #333;
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 280px;
+    flex: 1;
+    padding: 30px;
+    background-color: #F4F5FA;
+}
+
+/* Container Styling */
+.container {
+    width: 100%; /* Lebar kontainer menjadi fleksibel */
+    max-width: 100%; /* Maksimal lebar kontainer */
+    min-height: auto; /* Ketinggian minimum */
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading Styling */
+h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* Kalender */
 .calendar {
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 }
 
 .calendar-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .calendar-header h2 {
-    font-size: 14px; /* Ukuran header lebih kecil */
+    font-size: 1.5rem;
 }
 
 .calendar-header .btn-small {
-    font-size: 12px;
-    padding: 5px 10px;
+    font-size: 1rem;
+    padding: 8px 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
     background-color: #f9f9f9;
     cursor: pointer;
+    transition: all 0.3s;
 }
 
 .calendar-header .btn-small:hover {
@@ -58,20 +132,20 @@ h1 {
 .calendar-dates {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 3px; /* Jarak antar elemen lebih kecil */
+    gap: 5px;
     text-align: center;
 }
 
 .calendar-days div {
-    font-size: 10px; /* Ukuran font lebih kecil */
-    color: #555;
+    font-size: 1rem;
     font-weight: bold;
+    color: #555;
 }
 
 .calendar-dates div {
-    padding: 5px; /* Ukuran sel lebih kecil */
-    font-size: 10px;
-    border-radius: 3px;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
     background-color: #f9f9f9;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -82,17 +156,28 @@ h1 {
     color: white;
 }
 
+.calendar-dates .selected {
+    background-color: #007bff;
+    color: white;
+}
+
+.calendar-dates .in-range {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Schedule Form */
 .schedule-form {
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .schedule-form h2 {
-    font-size: 16px;
-    margin-bottom: 10px;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
 }
 
 .schedule-form label {
-    font-size: 12px;
+    font-size: 1rem;
     margin-top: 10px;
     display: block;
 }
@@ -101,9 +186,9 @@ h1 {
 .schedule-form select,
 .schedule-form button {
     width: 100%;
-    font-size: 12px; /* Ukuran input lebih kecil */
-    padding: 6px;
-    margin-top: 5px;
+    font-size: 1rem;
+    padding: 12px;
+    margin-top: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
@@ -114,20 +199,10 @@ h1 {
     color: white;
     cursor: pointer;
     border: none;
-    margin-top: 10px;
+    margin-top: 20px;
     transition: background-color 0.3s;
 }
 
 .schedule-form button:hover {
     background-color: #0056b3;
-}
-
-.calendar-dates .selected {
-    background-color: #007bff;
-    color: white;
-}
-
-.calendar-dates .in-range {
-    background-color: #007bff;
-    color: white;
 }
