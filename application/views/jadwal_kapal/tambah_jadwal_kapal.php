@@ -58,9 +58,14 @@
             </div>
 
             <!-- Form Tambah Jadwal -->
-            <form action="<?php echo base_url('jadwal_kapal/tambah_action'); ?>" method="post">
+            <form action="tambah_action" method="post">
                 <label for="ship-name">Nama Kapal</label>
-                <input type="text" id="ship-name" name="nama_kapal" class="form-control" placeholder="Masukkan nama kapal" required>
+                <select class="form-select" id="id_kapal" name="id_kapal" required>
+                    <option value="" disabled selected>Pilih Kapal</option>
+                    <?php foreach ($kapal as $k): ?>
+                        <option value="<?php echo $k->id_kapal; ?>"><?php echo $k->nama_kapal; ?></option>
+                    <?php endforeach; ?>
+                </select>
 
                 <label for="operation-status" class="mt-3">Status Alur</label>
                 <select id="operation-status" name="status_alur" class="form-control" required>
