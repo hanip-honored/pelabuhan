@@ -22,7 +22,14 @@
         
         return $this->db->get()->result();
     }
+
+    public function getAllKapal() {
+        return $this->db->get('kapal')->result();
+    }
     
+    public function insertDataAktivitas($data) {
+        return $this->db->insert('logistik', $data);
+    }
 
     public function updateDataAktivitas($id, $data) {
         $this->db->where('id_logistik', $id);

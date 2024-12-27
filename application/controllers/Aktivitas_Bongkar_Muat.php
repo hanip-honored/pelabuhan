@@ -16,8 +16,25 @@ class Aktivitas_Bongkar_Muat extends CI_Controller {
         
         $data['activities'] = $this->Aktivitas_model->getAllData($keyword);
         $data['keyword'] = $keyword;
+        $data['kapal'] = $this->Aktivitas_model->getAllKapal();
 
         $this->load->view('aktivitas_bongkar_muat/index', $data);
+    }
+
+    public function tambahAktivitas() {
+        $data = [
+            'id_logistik' => $this->input->post('id_logistik'),
+            'jenis_barang' => $this->input->post('jenis_barang'),
+            'jumlah_barang' => $this->input->post('jumlah_barang'),
+            'status_logistik' => $this->input->post('status_logistik')
+        ];
+
+        if ($this->Aktivitas_model->insertDataAktivitas($data)) {
+            $this->session->set_flashdata('success', 'Data berhasil ditambahkan.');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal menambahkan data.');
+        }
+        redirect('aktivitas_bongkar_muat');
     }
 
     public function updateAktivitas() {
