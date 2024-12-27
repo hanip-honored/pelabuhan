@@ -1,6 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
+// Controller: Manajemen_Gudang.php
 class Manajemen_Gudang extends CI_Controller {
 
     public function __construct() {
@@ -12,8 +11,7 @@ class Manajemen_Gudang extends CI_Controller {
     }
 
     public function index() {
-        $data['ketersediaan_gudang'] = $this->Gudang_model->getKetersediaanGudang();
+        $data['gudang_data'] = $this->Gudang_model->getAllGudangData();
         $this->load->view('manajemen_gudang/index', $data);
     }
-
 }

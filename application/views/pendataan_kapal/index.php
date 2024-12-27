@@ -34,7 +34,7 @@
                     <td><?php echo $ship->nama_kapal; ?></td>
                     <td><?php echo $ship->jenis_kapal; ?></td>
                     <td>
-                        <img src="<?php echo base_url('assets/images/ships/kapal.jpg'); ?>" alt="Ship Image" class="ship-image">
+                        <img src="<?php echo base_url('assets/images/ships/' . $ship->gambar_kapal); ?>" alt="Ship Image" class="ship-image">
                     </td>
                     <td><?php echo $ship->ukuran_kapal; ?></td>
                     <td><?php echo $ship->kapasitas_muatan; ?></td>
@@ -92,7 +92,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="gambar_kapal" class="form-label">Gambar Kapal</label>
-                        <input type="file" class="form-control" id="gambar_kapal" name="gambar_kapal">
+                        <input type="file" class="form-control" id="gambar_kapal" name="gambar_kapal" required>
                     </div>
                     <div class="mb-3">
                         <label for="ukuran_kapal" class="form-label">Ukuran Kapal (M)</label>
@@ -161,6 +161,7 @@
         </div>
     </div>
 </div>
+
 <script>
 function setEditData(ship) {
     document.getElementById('edit_id_kapal').value = ship.id_kapal;
