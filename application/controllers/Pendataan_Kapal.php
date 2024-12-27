@@ -16,4 +16,69 @@ class Pendataan_Kapal extends CI_Controller {
         $this->load->view('pendataan_kapal/index', $data);
     }
 
+    public function tambah() {
+        $this->load->view('pendataan_kapal/tambah');
+    }
+
+    public function tambah_aksi() {
+        $data = [
+            'nama_kapal' => $this->input->post('nama_kapal'),
+            'jenis_kapal' => $this->input->post('jenis_kapal'),
+            'gambar_kapal' => $this->uploadGambar(),
+            'ukuran_kapal' => $this->input->post('ukuran_kapal'),
+            'kapasitas_muatan' => $this->input->post('kapasitas_muatan'),
+            'status_kapal' => $this->input->post('status_kapal')
+        ];
+
+        $this->Kapal_model->insertKapal($data);
+        $this->session->set_flashdata('success', 'Data berhasil ditambahkan.');
+        redirect('pendataan_kapal');
+    }
+
+    public function edit($id) {
+        $data['kapal'] = $this->Kapal_model->getKapalById($id);
+        if (!$data['kapal']) {
+            show_404();
+        }
+        $this->load->view('pendataan_kapal/edit', $data);
+    }
+
+    public function edit_aksi() {
+        $id = $this->input->post('id_kapal');
+        $data = [
+            'nama_kapal' => $this->input->post('nama_kapal'),
+            'jenis_kapal' => $this->input->post('jenis_kapal'),
+            'gambar_kapal' => $this->uploadGambar() ?: $this->input->post('old_gambar_kapal'),
+            'ukuran_kapal' => $this->input->post('ukuran_kapal'),
+            'kapasitas_muatan' => $this->input->post('kapasitas_muatan'),
+            'status_kapal' => $this->input->post('status_kapal')
+        ];
+
+        if ($this->Kapal_model->updateKapal($id, $data)) {
+            $this->session->set_flashdata('success', 'Data berhasil diperbarui.');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal memperbarui data.');
+        }
+        redirect('pendataan_kapal');
+    }
+
+    public function hapus($id) {
+        $this->Kapal_model->deleteKapal($id);
+        $this->session->set_flashdata('success', 'Data berhasil dihapus.');
+        redirect('pendataan_kapal');
+    }
+
+    private function uploadGambar() {
+        $config['upload_path'] = './assets/images/ships/';
+        $config['allowed_types'] = 'jpg|jpeg|png';
+        $config['max_size'] = 2048;
+
+        $this->load->library('upload', $config);
+
+        if ($this->upload->do_upload('gambar_kapal')) {
+            return $this->upload->data('file_name');
+        }
+
+        return null;
+    }
 }
