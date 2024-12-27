@@ -143,7 +143,7 @@
                         <input type="hidden" id="id_logistik" name="id_logistik">
                         <div class="mb-3">
                             <label for="nama_kapal" class="form-label">Nama Kapal</label>
-                            <select class="form-select" id="nama_kapal" name="nama_kapal" required>
+                            <select class="form-select" id="id_kapal" name="id_kapal" required>
                             <option value="" disabled selected>Pilih Kapal</option>
                             <?php foreach ($kapal as $k): ?>
                                     <option value="<?php echo $k->id_kapal; ?>"><?php echo $k->nama_kapal; ?></option>

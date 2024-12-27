@@ -22,8 +22,11 @@ class Aktivitas_Bongkar_Muat extends CI_Controller {
     }
 
     public function tambahAktivitas() {
+        $last_id = $this->Aktivitas_model->getIdLogistik();
+
         $data = [
-            'id_logistik' => $this->input->post('id_logistik'),
+            'id_logistik' => 'L' . sprintf("%04s", $last_id + 1),
+            'id_kapal' => $this->input->post('id_kapal'),
             'jenis_barang' => $this->input->post('jenis_barang'),
             'jumlah_barang' => $this->input->post('jumlah_barang'),
             'status_logistik' => $this->input->post('status_logistik')
@@ -49,6 +52,15 @@ class Aktivitas_Bongkar_Muat extends CI_Controller {
             $this->session->set_flashdata('success', 'Data berhasil diperbarui.');
         } else {
             $this->session->set_flashdata('error', 'Gagal memperbarui data.');
+        }
+        redirect('aktivitas_bongkar_muat');
+    }
+
+    public function hapusAktivitas($id) {
+        if ($this->Aktivitas_model->hapusAktivitas($id)) {
+            $this->session->set_flashdata('success', 'Data berhasil dihapus.');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal menghapus data.');
         }
         redirect('aktivitas_bongkar_muat');
     }

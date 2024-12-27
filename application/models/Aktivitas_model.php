@@ -35,4 +35,17 @@
         $this->db->where('id_logistik', $id);
         return $this->db->update('logistik', $data);
     }
+
+    public function getIdLogistik() {
+        return $this->db->get('logistik')->num_rows();
+    }
+
+    public function hapusAktivitas($id) {
+        $this->db->where('id_logistik', $id);
+        if ($this->db->delete('logistik')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
