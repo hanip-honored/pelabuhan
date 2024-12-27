@@ -21,10 +21,11 @@
                 <tr>
                     <th>No</th>
                     <th>Nama Kapal</th>
-                    <th>Status Alur</th>
                     <th>Waktu Masuk</th>
                     <th>Waktu Keluar</th>
-                    <th>Jenis Operasi</th>
+                    <th>Pelabuhan Asal</th>
+                    <th>Pelabuhan Tujuan</th>
+                    <th>Status Alur</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -34,10 +35,11 @@
                 <tr>
                     <td><?php echo $no++;?></td>
                     <td><?php echo $jadwal->nama_kapal; ?></td>
-                    <td><?php echo $jadwal->status_alur; ?></td>
                     <td><?php echo $jadwal->waktu_masuk; ?></td>
                     <td><?php echo $jadwal->waktu_keluar; ?></td>
-                    <td><?php echo $jadwal->jenis_operasi; ?></td>
+                    <td><?php echo $jadwal->pelabuhan_asal; ?></td>
+                    <td><?php echo $jadwal->pelabuhan_tujuan; ?></td>
+                    <td><?php echo $jadwal->status_alur; ?></td>
                     <td>
                         <a href="#" class="btn btn-warning btn-sm" 
                         data-bs-toggle="modal" 

@@ -9,11 +9,19 @@ class Jadwal_model extends CI_Model {
     }
     
     public function getDataKapal() {
-        $this->db->select('jadwal.id_jadwal, kapal.nama_kapal, alur_kapal.status_alur, alur_kapal.waktu_masuk, alur_kapal.waktu_keluar, jadwal.jenis_operasi');
+        $this->db->select('jadwal.id_jadwal, kapal.nama_kapal, alur_kapal.waktu_masuk, alur_kapal.waktu_keluar, alur_kapal.pelabuhan_asal, alur_kapal.pelabuhan_tujuan, alur_kapal.status_alur');
         $this->db->from('kapal');
-        $this->db->join('jadwal', 'kapal.id_kapal = jadwal.id_kapal', 'left'); // LEFT JOIN kapal
-        $this->db->join('alur_kapal', 'jadwal.id_kapal = alur_kapal.id_kapal', 'left'); // LEFT JOIN jadwal (tambahan jika dibutuhkan)
+        $this->db->join('jadwal', 'kapal.id_kapal = jadwal.id_kapal', 'left');
+        $this->db->join('alur_kapal', 'jadwal.id_kapal = alur_kapal.id_kapal', 'left');
         
         return $this->db->get()->result();
+    }
+
+    public function insertDataAlurKapal($data) {
+        return $this->db->insert('alur_kapal', $data);
+    }
+
+    public function getIdAlur() {
+        return $this->db->get('alur_kapal')->num_rows();
     }
 }

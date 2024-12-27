@@ -54,7 +54,4 @@ $route['login'] = 'auth/login';
 $route['logout'] = 'auth/logout';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['manajemen_gudang'] = 'Manajemen_Gudang/index';
-$route['manajemen_gudang/tambah'] = 'Manajemen_Gudang/tambahGudang';
-$route['manajemen_gudang/edit/(:any)'] = 'Manajemen_Gudang/editGudang/$1';
-$route['manajemen_gudang/hapus/(:any)'] = 'Manajemen_Gudang/hapusGudang/$1';
+
