@@ -22,10 +22,30 @@
         
         return $this->db->get()->result();
     }
+
+    public function getAllKapal() {
+        return $this->db->get('kapal')->result();
+    }
     
+    public function insertDataAktivitas($data) {
+        return $this->db->insert('logistik', $data);
+    }
 
     public function updateDataAktivitas($id, $data) {
         $this->db->where('id_logistik', $id);
         return $this->db->update('logistik', $data);
+    }
+
+    public function getIdLogistik() {
+        return $this->db->get('logistik')->num_rows();
+    }
+
+    public function hapusAktivitas($id) {
+        $this->db->where('id_logistik', $id);
+        if ($this->db->delete('logistik')) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

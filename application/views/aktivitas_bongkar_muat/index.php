@@ -16,7 +16,11 @@
     <div class="main-content">
         <div class="container mt-5">
             <h1 class="text-center mb-4">Aktivitas Bongkar Muat</h1>
-            <a href="aktivitas_bongkar_muat/tambah_aktivitas" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Aktivitas</a>
+            <a href="#" id="tambahButton" class="btn btn-success mb-3" 
+                data-bs-toggle="modal" 
+                data-bs-target="#tambahModal">
+                <i class="fas fa-plus"></i> Tambah Aktivitas
+            </a>
 
             <form action="aktivitas_bongkar_muat" method="get" class="mb-3">
                 <div class="input-group">
@@ -88,7 +92,7 @@
         </div>
     </div>
 
-    <!-- MODAL -->
+    <!-- MODAL EDIT-->
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -120,6 +124,50 @@
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Simpan Perubahan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL TAMBAH-->
+    <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tambahModalLabel">Tambah Aktivitas Bongkar Muat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="tambahForm" action="aktivitas_bongkar_muat/tambahAktivitas" method="post">
+                        <input type="hidden" id="id_logistik" name="id_logistik">
+                        <div class="mb-3">
+                            <label for="nama_kapal" class="form-label">Nama Kapal</label>
+                            <select class="form-select" id="id_kapal" name="id_kapal" required>
+                            <option value="" disabled selected>Pilih Kapal</option>
+                            <?php foreach ($kapal as $k): ?>
+                                    <option value="<?php echo $k->id_kapal; ?>"><?php echo $k->nama_kapal; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="jenis_barang" class="form-label">Jenis barang</label>
+                            <input type="text" class="form-control" id="jenis_barang" name="jenis_barang" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="jumlah_barang" class="form-label">Jumlah Barang</label>
+                            <input type="number" class="form-control" id="jumlah_barang" name="jumlah_barang" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="status_logistik" class="form-label">Status Logistik</label>
+                            <select class="form-select" id="status_logistik" name="status_logistik" required>
+                                <option value="" disabled selected>Pilih Status</option>
+                                <option value="dimuat">dimuat</option>
+                                <option value="dibongkar">dibongkar</option>
+                                <option value="transit">transit</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Tambah Aktivitas</button>
                     </form>
                 </div>
             </div>

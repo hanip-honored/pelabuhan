@@ -19,6 +19,7 @@
         <table class="table table-bordered table-hover table-striped">
             <thead class="table-light">
                 <tr>
+                    <th>No</th>
                     <th>Nama Kapal</th>
                     <th>Status Alur</th>
                     <th>Waktu Masuk</th>
@@ -28,8 +29,10 @@
                 </tr>
             </thead>
             <tbody>
+                <?php $no = 1;?>
                 <?php foreach ($jadwal_kapal as $jadwal): ?>
                 <tr>
+                    <td><?php echo $no++;?></td>
                     <td><?php echo $jadwal->nama_kapal; ?></td>
                     <td><?php echo $jadwal->status_alur; ?></td>
                     <td><?php echo $jadwal->waktu_masuk; ?></td>
@@ -37,15 +40,16 @@
                     <td><?php echo $jadwal->jenis_operasi; ?></td>
                     <td>
                         <a href="#" class="btn btn-warning btn-sm" 
-                           data-bs-toggle="modal" 
-                           data-bs-target="#editModal" 
-                           onclick="setEditData(<?php echo htmlspecialchars(json_encode($jadwal), ENT_QUOTES, 'UTF-8'); ?>)">
-                           Edit
+                        data-bs-toggle="modal" 
+                        data-bs-target="#editModal" 
+                        onclick="setEditData(<?php echo htmlspecialchars(json_encode($jadwal), ENT_QUOTES, 'UTF-8'); ?>)">
+                        Edit
                         </a>
                         <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal<?php echo $jadwal->id_jadwal; ?>">Hapus</button>
                     </td>
                 </tr>
 
+                <!-- Modal Konfirmasi Hapus -->
                 <div class="modal fade" id="deleteModal<?php echo $jadwal->id_jadwal; ?>" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">

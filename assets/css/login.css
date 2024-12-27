@@ -6,11 +6,17 @@
 }
 
 body {
-    background: linear-gradient(135deg, #6dd5ed, #2193b0); /* Gradient Background */
+    background-color: #61BEFA;
+    background-image: url('../images/background_login.png');
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    background-attachment: fixed;
+    background-size: 100% auto;
     height: 100vh;
+    margin: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
 }
 
 .login-container {
