@@ -30,4 +30,26 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    document.querySelectorAll('.hapusButton').forEach(function (button) {
+        button.addEventListener('click', function (event) {
+            console.log('Hapus');
+            event.preventDefault();
+            const href = this.dataset.href;
+            Swal.fire({
+                title: "Apakah Anda yakin?",
+                text: "Data akan dihapus",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, hapus!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = href;
+                }
+            });
+        });
+    });    
 });
+

@@ -17,6 +17,7 @@ class Aktivitas_Bongkar_Muat extends CI_Controller {
         $data['activities'] = $this->Aktivitas_model->getAllData($keyword);
         $data['keyword'] = $keyword;
         $data['kapal'] = $this->Aktivitas_model->getAllKapal();
+        
 
         $this->load->view('aktivitas_bongkar_muat/index', $data);
     }

@@ -78,7 +78,9 @@
                                         <i class="fas fa-edit"></i>
                                         Edit
                                     </a>
-                                    <a href="<?php echo base_url('activity/delete/' . $activity->id_logistik); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Hapus aktivitas ini?')"><i class="fas fa-trash"></i> Hapus</a>
+                                    <button data-href="aktivitas_bongkar_muat/hapusAktivitas/<?php echo $activity->id_logistik?>" class="btn btn-danger btn-sm hapusButton">
+                                        <i class="fas fa-trash"></i> Hapus
+                                    </button>
                                 </td>
                             </tr>
                         <?php $no++; endforeach; ?>
