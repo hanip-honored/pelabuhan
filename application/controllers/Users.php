@@ -7,9 +7,13 @@ class Users extends CI_Controller {
         parent::__construct();
         $this->load->model('User_model');
     }
-
+    
     public function index() {
-        $data['users'] = $this->User_model->getAllUsersData();
+        $keyword = $this->input->get('keyword');
+        
+        $data['users'] = $this->Kapal_model->getAllUsersData($keyword);
+        $data['keyword'] = $keyword;
+        
         $this->load->view('users/index', $data);
     }
 

@@ -10,6 +10,7 @@ class Pendataan_Kapal extends CI_Controller {
         }
         $this->load->model('Kapal_model');
     }
+    
     public function index() {
         $keyword = $this->input->get('keyword');
         
@@ -78,7 +79,7 @@ class Pendataan_Kapal extends CI_Controller {
         }
         redirect('pendataan_kapal');
     }
-    
+
     public function hapus($id) {
         if ($this->Kapal_model->deleteKapal($id)) {
             $this->session->set_flashdata('success', 'Data berhasil dihapus.');

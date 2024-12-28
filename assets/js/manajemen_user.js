@@ -1,4 +1,11 @@
 // Function to set data for editing
+function searchUser() {
+    const keywordInput = document.getElementById('keywordInput');
+    if (keywordInput.value.trim() === '') {
+        window.location.href = 'manajemen_user';
+    }
+}
+
 function setEditData(user) {
     document.querySelector('#editModal input[name="id_user"]').value = user.id_user;
     document.querySelector('#editModal input[name="nama_user"]').value = user.nama_user;

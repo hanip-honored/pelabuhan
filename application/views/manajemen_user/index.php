@@ -19,10 +19,10 @@
             <a href="#" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#tambahModal">
                 <i class="fas fa-plus"></i> Tambah User
             </a>
-
+            
             <form action="manajemen_user" method="get" class="mb-3">
                 <div class="input-group">
-                    <input type="text" name="keyword" class="form-control" placeholder="Cari user..." value="<?php echo isset($keyword) ? $keyword : ''; ?>">
+                    <input type="text" id="keywordInput" name="keyword" class="form-control" placeholder="Cari user..." oninput="searchUser()" value="<?php echo isset($keyword) ? $keyword : ''; ?>">
                     <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Cari</button>
                 </div>
             </form>
@@ -131,7 +131,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
     <script src="<?php echo base_url('assets/js/manajemen_user.js'); ?>" defer></script>
 </body>
