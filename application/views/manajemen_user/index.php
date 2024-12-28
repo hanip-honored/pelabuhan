@@ -80,7 +80,11 @@
                         </div>
                         <div class="modal-body">
                             <input type="text" class="form-control mb-3" name="nama_user" placeholder="Nama User" required>
-                            <input type="text" class="form-control mb-3" name="level" placeholder="Level" required>
+                            <select class="form-select mb-3" name="level" id="level" required>
+                                <option value="admin">Admin</option>
+                                <option value="petugas kapal">Petugas Kapal</option>
+                                <option value="petugas gudang">Petugas Gudang</option>
+                            </select>
                             <input type="text" class="form-control mb-3" name="username" placeholder="Username" required>
                             <input type="password" class="form-control" name="password" placeholder="Password" required>
                         </div>
