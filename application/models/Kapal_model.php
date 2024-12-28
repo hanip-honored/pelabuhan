@@ -7,14 +7,21 @@ class Kapal_model extends CI_Model {
         parent::__construct();
         $this->load->database();
     }
+
+    public function getDataKapal($keyword = null) {
+        if (!empty($keyword)) {
+            $this->db->like('nama_kapal', $keyword);
+            $this->db->or_like('jenis_kapal', $keyword);
+            $this->db->or_like('ukuran_kapal', $keyword);
+            $this->db->or_like('kapasitas_muatan', $keyword);
+            $this->db->or_like('status_kapal', $keyword);
+        }
+        return $this->db->get('kapal')->result();
+    }
     
     public function getDataKapalTerbaru() {
         $this->db->order_by('id_kapal', 'DESC');
         $this->db->limit(4);
-        return $this->db->get('kapal')->result();
-    }
-
-    public function getDataKapal() {
         return $this->db->get('kapal')->result();
     }
 
@@ -37,6 +44,10 @@ class Kapal_model extends CI_Model {
 
     public function deleteKapal($id) {
         $this->db->where('id_kapal', $id);
-        return $this->db->delete('kapal');
+        if ($this->db->delete('kapal')) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

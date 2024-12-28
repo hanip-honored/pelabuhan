@@ -10,9 +10,12 @@ class Pendataan_Kapal extends CI_Controller {
         }
         $this->load->model('Kapal_model');
     }
-
     public function index() {
-        $data['ships'] = $this->Kapal_model->getDataKapal();
+        $keyword = $this->input->get('keyword');
+        
+        $data['ships'] = $this->Kapal_model->getDataKapal($keyword);
+        $data['keyword'] = $keyword;
+        
         $this->load->view('pendataan_kapal/index', $data);
     }
 
@@ -67,10 +70,12 @@ class Pendataan_Kapal extends CI_Controller {
         }
         redirect('pendataan_kapal');
     }
-
     public function hapus($id) {
-        $this->Kapal_model->deleteKapal($id);
-        $this->session->set_flashdata('success', 'Data berhasil dihapus.');
+        if ($this->Kapal_model->deleteKapal($id)) {
+            $this->session->set_flashdata('success', 'Data berhasil dihapus.');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal menghapus data.');
+        }
         redirect('pendataan_kapal');
     }
 
