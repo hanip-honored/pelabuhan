@@ -54,15 +54,23 @@ class Pendataan_Kapal extends CI_Controller {
 
     public function edit_aksi() {
         $id = $this->input->post('id_kapal');
+        $old_image = $this->input->post('old_gambar_kapal');
+        $new_image = $this->uploadGambar();
+    
+        // Jika ada gambar baru yang diunggah, hapus gambar lama
+        if ($new_image && $old_image && file_exists('./assets/images/ships/' . $old_image)) {
+            unlink('./assets/images/ships/' . $old_image);
+        }
+    
         $data = [
             'nama_kapal' => $this->input->post('nama_kapal'),
             'jenis_kapal' => $this->input->post('jenis_kapal'),
-            'gambar_kapal' => $this->uploadGambar() ?: $this->input->post('old_gambar_kapal'),
+            'gambar_kapal' => $new_image ?: $old_image,
             'ukuran_kapal' => $this->input->post('ukuran_kapal'),
             'kapasitas_muatan' => $this->input->post('kapasitas_muatan'),
             'status_kapal' => $this->input->post('status_kapal')
         ];
-
+    
         if ($this->Kapal_model->updateKapal($id, $data)) {
             $this->session->set_flashdata('success', 'Data berhasil diperbarui.');
         } else {
@@ -70,6 +78,7 @@ class Pendataan_Kapal extends CI_Controller {
         }
         redirect('pendataan_kapal');
     }
+    
     public function hapus($id) {
         if ($this->Kapal_model->deleteKapal($id)) {
             $this->session->set_flashdata('success', 'Data berhasil dihapus.');

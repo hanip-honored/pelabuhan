@@ -27,7 +27,7 @@
 
         <form action="pendataan_kapal" method="get" class="mb-3">
                 <div class="input-group">
-                    <input type="text" id="keywordInput" name="keyword" class="form-control" placeholder="Cari aktivitas..." oninput="inputSearch()" value="<?php echo isset($keyword) ? $keyword : ''; ?>">
+                    <input type="text" id="keywordInput" name="keyword" class="form-control" placeholder="Cari Data..." oninput="inputSearch()" value="<?php echo isset($keyword) ? $keyword : ''; ?>">
                     <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Cari</button>
                 </div>
             </form>
@@ -162,12 +162,7 @@
                         <input type="hidden" id="id_kapal" name="id_kapal">
                         <div class="mb-3">
                             <label for="nama_kapal" class="form-label">Nama Kapal</label>
-                            <select class="form-select" id="nama_kapal" name="nama_kapal" required>
-                            <option value="" disabled selected>Pilih Kapal</option>
-                            <?php foreach ($ships as $k): ?>
-                                    <option value="<?php echo $k->nama_kapal; ?>"><?php echo $k->nama_kapal; ?></option>
-                                <?php endforeach; ?>
-                            </select>
+                            <input type="text" class="form-control" id="nama_kapal" name="nama_kapal" required>
                         </div>
                         <div class="mb-3">
                             <label for="jenis_kapal" class="form-label">Jenis Kapal</label>

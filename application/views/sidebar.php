@@ -19,8 +19,8 @@
             <a href="dashboard"><i class="fas fa-home"></i> Dashboard</a>
         </li>
         <?php if ($_SESSION['level'] == 'admin'): ?>
-            <li class="<?php echo ($this->uri->segment(1) == 'users') ? 'active' : ''; ?>">
-                <a href="users"><i class="fas fa-user"></i> Manajemen User</a>
+            <li class="<?php echo ($this->uri->segment(1) == 'manajemen_user') ? 'active' : ''; ?>">
+                <a href="manajemen_user"><i class="fas fa-user"></i> Manajemen User</a>
             </li>
         <?php endif; ?>
         <?php if ($_SESSION['level'] == 'admin' || $_SESSION['level'] == 'petugas kapal'): ?>
