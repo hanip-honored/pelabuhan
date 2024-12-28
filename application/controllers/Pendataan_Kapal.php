@@ -16,23 +16,29 @@ class Pendataan_Kapal extends CI_Controller {
         $this->load->view('pendataan_kapal/index', $data);
     }
 
-    public function tambah() {
-        $this->load->view('pendataan_kapal/tambah');
-    }
-
     public function tambah_aksi() {
+        $last_id = $this->Kapal_model->getKapalId();
+
         $data = [
+            'id_kapal' => 'k' . sprintf("%04s", $last_id + 1),
             'nama_kapal' => $this->input->post('nama_kapal'),
             'jenis_kapal' => $this->input->post('jenis_kapal'),
             'gambar_kapal' => $this->uploadGambar(),
             'ukuran_kapal' => $this->input->post('ukuran_kapal'),
             'kapasitas_muatan' => $this->input->post('kapasitas_muatan'),
-            'status_kapal' => $this->input->post('status_kapal')
+            'status_kapal' => $this->input->post('status_kapal'),
         ];
 
-        $this->Kapal_model->insertKapal($data);
-        $this->session->set_flashdata('success', 'Data berhasil ditambahkan.');
+        if ($this->Kapal_model->insertKapal($data)) {
+            $this->session->set_flashdata('success', 'Data berhasil ditambahkan.');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal menambahkan data.');
+        }
         redirect('pendataan_kapal');
+    }
+
+    public function tambah() {
+        $this->load->view('pendataan_kapal/tambah');
     }
 
     public function edit($id) {

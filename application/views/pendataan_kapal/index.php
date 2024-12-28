@@ -19,7 +19,12 @@
 <div class="main-content">
     <div class="container mt-5">
         <h1 class="text-center mb-4">Pendataan Kapal</h1>
-        <a href="<?php echo base_url('pendataan_kapal/tambah'); ?>" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Data</a>
+        <a href="#" id="tambahButton" class="btn btn-success mb-3" 
+                data-bs-toggle="modal" 
+                data-bs-target="#tambahModal">
+                <i class="fas fa-plus"></i> Tambah Data
+            </a>
+
         <form action="pendataan_kapal" method="get" class="mb-3">
                 <div class="input-group">
                     <input type="text" id="keywordInput" name="keyword" class="form-control" placeholder="Cari aktivitas..." oninput="checkInput()" value="<?php echo isset($keyword) ? $keyword : ''; ?>">
@@ -142,6 +147,57 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tambahModalLabel">Tambah Data Kapal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="tambahForm" action="pendataan_kapal/tambah_Aksi" method="post">
+                        <input type="hidden" id="id_kapal" name="id_kapal">
+                        <div class="mb-3">
+                            <label for="nama_kapal" class="form-label">Nama Kapal</label>
+                            <select class="form-select" id="nama_kapal" name="nama_kapal" required>
+                            <option value="" disabled selected>Pilih Kapal</option>
+                            <?php foreach ($ships as $k): ?>
+                                    <option value="<?php echo $k->nama_kapal; ?>"><?php echo $k->nama_kapal; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="jenis_kapal" class="form-label">Jenis Kapal</label>
+                            <input type="text" class="form-control" id="jenis_kapal" name="jenis_kapal" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="gambar_kapal" class="form-label">Gambar Kapal</label>
+                            <input type="file" class="form-control" id="gambar_kapal" name="gambar_kapal" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ukuran_kapal" class="form-label">Ukuran Kapal</label>
+                            <input type="number" class="form-control" id="ukuran_kapal" name="ukuran_kapal" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="kapasitas_muatan" class="form-label">Kapasitas Muatan</label>
+                            <input type="number" class="form-control" id="kapasitas_muatan" name="kapasitas_muatan" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="status_logistik" class="form-label">Status Logistik</label>
+                            <select class="form-select" id="status_logistik" name="status_logistik" required>
+                                <option value="" disabled selected>Pilih Status</option>
+                                <option value="Masuk">Masuk</option>
+                                <option value="Keluar">Keluar</option>
+                                <option value="Sedang Bongkar Muat">Sedang Bongkar Muat</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Tambah Data</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 <script src="<?php echo base_url('assets/js/pendataan_kapal.js'); ?>" defer></script>
 </body>
 </html>
