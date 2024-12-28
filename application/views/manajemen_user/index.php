@@ -40,6 +40,7 @@
                         <th>Nama User</th>
                         <th>Level</th>
                         <th>Username</th>
+                        <th>Password</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -51,6 +52,7 @@
                                 <td><?php echo $user->nama_user; ?></td>
                                 <td><?php echo $user->level; ?></td>
                                 <td><?php echo $user->username; ?></td>
+                                <td><?php echo $user->password; ?></td>
                                 <td>
                                     <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal" onclick="setEditData(<?php echo htmlspecialchars(json_encode($user), ENT_QUOTES, 'UTF-8'); ?>)">
                                         <i class="fas fa-edit"></i> Edit
@@ -78,11 +80,7 @@
                         </div>
                         <div class="modal-body">
                             <input type="text" class="form-control mb-3" name="nama_user" placeholder="Nama User" required>
-                            <select class="form-select mb-3" name="level" required>
-                                <option value="">Pilih Level</option>
-                                <option value="admin">Admin</option>
-                                <option value="petugas operasional">Petugas Operasional</option>
-                            </select>
+                            <input type="text" class="form-control mb-3" name="level" placeholder="Level" required>
                             <input type="text" class="form-control mb-3" name="username" placeholder="Username" required>
                             <input type="password" class="form-control" name="password" placeholder="Password" required>
                         </div>
@@ -93,6 +91,47 @@
                 </div>
             </div>
         </div>
+
+                <!-- Modal Edit -->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="manajemen_user/updateUser" method="post">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel">Edit User</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" class="form-control" name="id_user" id="edit_id_user">
+                            <div class="mb-3">
+                                <label for="edit_nama_user" class="form-label">Nama User</label>
+                                <input type="text" class="form-control" name="nama_user" id="edit_nama_user" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit_level" class="form-label">Level</label>
+                                <select class="form-select" name="level" id="edit_level" required>
+                                    <option value="admin">Admin</option>
+                                    <option value="petugas kapal">Petugas Kapal</option>
+                                    <option value="petugas gudang">Petugas Gudang</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit_username" class="form-label">Username</label>
+                                <input type="text" class="form-control" name="username" id="edit_username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="edit_password" class="form-label">Password</label>
+                                <input type="password" class="form-control" name="password" id="edit_password">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary w-100">Simpan Perubahan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
     </div>
     <script src="<?php echo base_url('assets/js/manajemen_user.js'); ?>" defer></script>
 </body>

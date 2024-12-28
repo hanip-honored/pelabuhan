@@ -1,9 +1,13 @@
+// Function to set data for editing
 function setEditData(user) {
+    document.querySelector('#editModal input[name="id_user"]').value = user.id_user;
     document.querySelector('#editModal input[name="nama_user"]').value = user.nama_user;
     document.querySelector('#editModal select[name="level"]').value = user.level;
     document.querySelector('#editModal input[name="username"]').value = user.username;
+    document.querySelector('#editModal input[name="password"]').value = user.password;
 }
 
+// Event listener to confirm deletion
 document.addEventListener('DOMContentLoaded', function () {
     const deleteButtons = document.querySelectorAll('.btn-danger');
     deleteButtons.forEach(button => {
@@ -25,4 +29,27 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     });
+});
+
+// Event listener to handle form submission for edit
+document.addEventListener('DOMContentLoaded', function () {
+    const editForm = document.getElementById('editForm');
+    if (editForm) {
+        editForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Data akan diperbarui.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Perbarui!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    editForm.submit();
+                }
+            });
+        });
+    }
 });

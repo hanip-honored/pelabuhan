@@ -28,6 +28,7 @@ class User_model extends CI_Model {
             $this->db->like('nama_user', $keyword);
             $this->db->or_like('level', $keyword);
             $this->db->or_like('username', $keyword);
+            $this->db->or_like('password', $keyword);
         }
         return $this->db->get('users')->result();
     }
