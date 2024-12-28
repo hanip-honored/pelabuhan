@@ -20,8 +20,8 @@ class Kapal_model extends CI_Model {
         return $this->db->insert('kapal', $data);
     }
 
-    public function getKapalById($id) {
-        return $this->db->get_where('kapal', ['id_kapal' => $id])->row();
+    public function getKapalId() {
+        return $this->db->get('kapal')->num_rows();
     }
 
     public function updateKapal($id, $data) {
