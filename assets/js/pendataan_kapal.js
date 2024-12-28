@@ -1,4 +1,4 @@
-function checkInput() {
+function inputSearch() {
     const keywordInput = document.getElementById('keywordInput');
     if (keywordInput.value.trim() === '') {
         window.location.href = 'pendataan_kapal';

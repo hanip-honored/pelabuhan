@@ -27,7 +27,7 @@
 
         <form action="pendataan_kapal" method="get" class="mb-3">
                 <div class="input-group">
-                    <input type="text" id="keywordInput" name="keyword" class="form-control" placeholder="Cari aktivitas..." oninput="checkInput()" value="<?php echo isset($keyword) ? $keyword : ''; ?>">
+                    <input type="text" id="keywordInput" name="keyword" class="form-control" placeholder="Cari aktivitas..." oninput="inputSearch()" value="<?php echo isset($keyword) ? $keyword : ''; ?>">
                     <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Cari</button>
                 </div>
             </form>
@@ -91,7 +91,7 @@
                 <?php $no++; endforeach; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="6" class="text-center">Tidak ada data aktivitas bongkar muat.</td>
+                            <td colspan="6" class="text-center">Tidak ada data Kapal.</td>
                         </tr>
                 <?php endif; ?>
             </tbody>
