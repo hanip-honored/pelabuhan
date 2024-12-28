@@ -156,7 +156,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="tambahForm" action="pendataan_kapal/tambah_Aksi" method="post">
+                    <form id="tambahForm" action="pendataan_kapal/tambah_Aksi" method="post" enctype="multipart/form-data">
                         <input type="hidden" id="id_kapal" name="id_kapal">
                         <div class="mb-3">
                             <label for="nama_kapal" class="form-label">Nama Kapal</label>
@@ -184,8 +184,8 @@
                             <input type="number" class="form-control" id="kapasitas_muatan" name="kapasitas_muatan" required>
                         </div>
                         <div class="mb-3">
-                            <label for="status_logistik" class="form-label">Status Logistik</label>
-                            <select class="form-select" id="status_logistik" name="status_logistik" required>
+                            <label for="status_kapal" class="form-label">Status Kapal</label>
+                            <select class="form-select" id="status_kapal" name="status_kapal" required>
                                 <option value="" disabled selected>Pilih Status</option>
                                 <option value="Masuk">Masuk</option>
                                 <option value="Keluar">Keluar</option>

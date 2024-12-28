@@ -15,7 +15,7 @@ class Dashboard extends CI_Controller {
     }
 
     public function index() {
-        $data['status_kapal'] = $this->Kapal_model->getDataKapal();
+        $data['status_kapal'] = $this->Kapal_model->getDataKapalTerbaru();
         $data['ketersediaan_gudang'] = $this->Gudang_model->getKetersediaanGudang();
         $data['operasional'] = [
             'user' => $this->User_model->getTotalUser(),

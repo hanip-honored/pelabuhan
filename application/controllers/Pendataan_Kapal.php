@@ -20,7 +20,7 @@ class Pendataan_Kapal extends CI_Controller {
         $last_id = $this->Kapal_model->getKapalId();
 
         $data = [
-            'id_kapal' => 'k' . sprintf("%04s", $last_id + 1),
+            'id_kapal' => 'K' . sprintf("%04s", $last_id + 1),
             'nama_kapal' => $this->input->post('nama_kapal'),
             'jenis_kapal' => $this->input->post('jenis_kapal'),
             'gambar_kapal' => $this->uploadGambar(),
