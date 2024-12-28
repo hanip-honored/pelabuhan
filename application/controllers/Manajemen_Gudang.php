@@ -11,7 +11,10 @@ class Manajemen_Gudang extends CI_Controller {
     }
 
     public function index() {
-        $data['gudang_data'] = $this->Gudang_model->getAllGudangData();
+        $keyword = $this->input->get('keyword');
+        
+        $data['keyword'] = $keyword;
+        $data['gudang_data'] = $this->Gudang_model->getAllGudangData($keyword);
         $this->load->view('manajemen_gudang/index', $data);
     }
 }

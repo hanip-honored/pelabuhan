@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="login-container">
-        <h2>Login Admin</h2>
+        <h2>Login Pelabuhan</h2>
         <?php if (!empty($error)): ?>
             <div class="error-message"><?php echo $error; ?></div>
         <?php endif; ?>

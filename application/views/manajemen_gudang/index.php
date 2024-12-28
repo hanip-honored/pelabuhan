@@ -65,9 +65,9 @@
 
             <a href="#" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Gudang</a>
 
-            <form action="#" method="get" class="mb-3">
+            <form action="manajemen_gudang" method="get" class="mb-3">
                 <div class="input-group">
-                    <input type="text" name="keyword" class="form-control" placeholder="Cari gudang...">
+                    <input type="text" id="keywordInput" name="keyword" class="form-control" placeholder="Cari data..." oninput="checkInput()" value="<?php echo isset($keyword) ? $keyword : ''; ?>">
                     <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Cari</button>
                 </div>
             </form>
@@ -75,7 +75,6 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>ID Gudang</th>
                         <th>Lokasi Gudang</th>
                         <th>Kapasitas Maksimal</th>
                         <th>Total Terisi</th>
@@ -88,7 +87,6 @@
                     <?php if (!empty($gudang_data)): ?>
                         <?php foreach ($gudang_data as $gudang): ?>
                             <tr>
-                                <td><?php echo $gudang->id_gudang; ?></td>
                                 <td><?php echo $gudang->lokasi_gudang; ?></td>
                                 <td><?php echo $gudang->kapasitas_gudang; ?></td>
                                 <td><?php echo $gudang->total_terisi; ?></td>
@@ -109,5 +107,7 @@
             </table>
         </div>
     </div>
+
+    <script src="<?php echo base_url('assets/js/manajemen_gudang.js');?>"></script>
 </body>
 </html>

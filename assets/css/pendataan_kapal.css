@@ -71,3 +71,8 @@ h1 {
     background-color: #198754;
     color: white;
 }
+
+.image-container {
+    display: flex;
+    align-items: center;
+}

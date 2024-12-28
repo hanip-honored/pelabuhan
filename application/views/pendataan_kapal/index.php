@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/css/pendataan_kapal.css'); ?>">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        base_url = '<?php echo base_url(); ?>';
+    </script>
 </head>
 <body>
 <?php $this->load->view('sidebar'); ?>
@@ -112,6 +115,10 @@
                     <div class="mb-3">
                         <label for="edit_gambar_kapal" class="form-label">Gambar Kapal</label>
                         <input type="file" class="form-control" id="edit_gambar_kapal" name="gambar_kapal">
+                        <div class="image-container">
+                            <img src="" alt="Ship Image" id="edit_kapal_old" class="ship-image mt-2">
+                            <p id="nama_file"></p>
+                        </div>
                     </div>
                     <div class="mb-3">
                         <label for="edit_ukuran_kapal" class="form-label">Ukuran Kapal (M)</label>

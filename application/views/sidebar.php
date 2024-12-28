@@ -4,20 +4,25 @@
     <div class="profile">
     <?php
         if ($_SESSION['level'] == 'admin') {
-            $user_image = 'admin.jpg';
+            $user_image = 'admin.png';
         } elseif ($_SESSION['level'] == 'petugas kapal') {
-            $user_image = 'petugas_kapal.jpg';
+            $user_image = 'petugas_kapal.png';
         } elseif ($_SESSION['level'] == 'petugas gudang') {
-            $user_image = 'petugas_gudang.jpg';
+            $user_image = 'petugas_gudang.png';
         }
         ?>
-        <img src="<?php echo base_url('assets/images/'. $user_image); ?>" alt="User Image">
+        <img src="<?php echo base_url('assets/images/users/'. $user_image); ?>" alt="User Image">
         <h3><?php echo ucwords($_SESSION['level']) ?></h3>
     </div>
     <ul>
         <li class="<?php echo ($this->uri->segment(1) == 'dashboard') ? 'active' : ''; ?>">
             <a href="dashboard"><i class="fas fa-home"></i> Dashboard</a>
         </li>
+        <?php if ($_SESSION['level'] == 'admin'): ?>
+            <li class="<?php echo ($this->uri->segment(1) == 'users') ? 'active' : ''; ?>">
+                <a href="users"><i class="fas fa-user"></i> Manajemen User</a>
+            </li>
+        <?php endif; ?>
         <?php if ($_SESSION['level'] == 'admin' || $_SESSION['level'] == 'petugas kapal'): ?>
             <li class="<?php echo ($this->uri->segment(1) == 'pendataan_kapal') ? 'active' : ''; ?>">
                 <a href="pendataan_kapal"><i class="fas fa-ship"></i> Pendataan Kapal</a>

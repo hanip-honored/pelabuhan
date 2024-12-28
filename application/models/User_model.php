@@ -19,4 +19,9 @@ class User_model extends CI_Model {
     public function getTotalUser() {
         return $this->db->count_all('users');
     }
+
+    public function getAllUsersData() {
+        $this->db->order_by('id_user', 'DESC');
+        return $this->db->get('users')->result();
+    }
 }
