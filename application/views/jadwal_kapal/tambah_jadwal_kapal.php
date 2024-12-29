@@ -3,94 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Penjadwalan Kapal</title>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/dashboard.css'); ?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/tambah_jadwal_kapal.css'); ?>">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Tambah Jadwal Kapal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+        .calendar .day {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            background-color: #f9f9f9;
+        }
+        .calendar .day:hover {
+            background-color: #e0e0e0;
+        }
+        .calendar .selected {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+    <script>
+        let startDate = null;
+        let endDate = null;
+
+        function selectDate(dayElement) {
+            const day = dayElement.getAttribute('data-day');
+
+            if (!startDate) {
+                startDate = day;
+                endDate = day;
+            } else if (new Date(day) < new Date(startDate)) {
+                startDate = day;
+            } else {
+                endDate = day;
+            }
+
+            highlightDates();
+
+            // Mengisi input waktu_masuk dan waktu_keluar dengan startDate dan endDate
+            document.getElementById('waktu_masuk').value = startDate + 'T00:00';
+            document.getElementById('waktu_keluar').value = endDate + 'T23:59';
+        }
+
+        function highlightDates() {
+            const days = document.querySelectorAll('.calendar .day');
+            days.forEach(day => {
+                const currentDay = day.getAttribute('data-day');
+                day.classList.remove('selected');
+                if (startDate && endDate && currentDay >= startDate && currentDay <= endDate) {
+                    day.classList.add('selected');
+                }
+            });
+        }
+
+        function resetSelection() {
+            startDate = null;
+            endDate = null;
+            highlightDates();
+            document.getElementById('waktu_masuk').value = '';
+            document.getElementById('waktu_keluar').value = '';
+        }
+    </script>
 </head>
 <body>
-<div class="sidebar">
-    <div class="profile">
-        <img src="<?php echo base_url('assets/images/user.png'); ?>" alt="User Image">
-        <h3><?php echo ucwords($_SESSION['level']) ?></h3>
-    </div>
-    <ul>
-        <li class="<?php echo ($this->uri->segment(1) == 'dashboard') ? 'active' : ''; ?>">
-            <a href="../dashboard"><i class="fas fa-home"></i> Dashboard</a>
-        </li>
-        <li class="<?php echo ($this->uri->segment(1) == 'pendataan_kapal') ? 'active' : ''; ?>">
-            <a href="../pendataan_kapal"><i class="fas fa-ship"></i> Pendataan Kapal</a>
-        </li>
-        <li class="<?php echo ($this->uri->segment(1) == 'jadwal_kapal') ? 'active' : ''; ?>">
-            <a href="../jadwal_kapal"><i class="fas fa-calendar-alt"></i> Jadwal Kapal</a>
-        </li>
-        <li class="<?php echo ($this->uri->segment(1) == 'aktivitas_bongkar_muat') ? 'active' : ''; ?>">
-            <a href="../aktivitas_bongkar_muat"><i class="fas fa-box"></i> Bongkar Muat</a>
-        </li>
-        <li class="<?php echo ($this->uri->segment(1) == 'manajemen_gudang') ? 'active' : ''; ?>">
-            <a href=".//manajemen_gudang"><i class="fas fa-warehouse"></i> Manajemen Gudang</a>
-        </li>
-        <li>
-            <a href="logout" style="color: red; text-decoration: none;">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </a>
-        </li>
-    </ul>
-</div>
-    <div class="main-content">
-        <div class="container">
-            <h1 class="text-center mb-4">Penjadwalan Kapal</h1>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Tambah Jadwal Kapal</h1>
 
-            <!-- Kalender -->
-            <div class="calendar mb-4">
-                <div class="calendar-header">
-                    <button id="prev-month" class="btn-small">&lt;</button>
-                    <h2 id="month-year"></h2>
-                    <button id="next-month" class="btn-small">&gt;</button>
-                </div>
-                <div class="calendar-days">
-                    <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
-                </div>
-                <div class="calendar-dates" id="calendar-dates"></div>
-            </div>
+        <!-- Kalender -->
+        <div class="calendar">
+            <script>
+                const calendarElement = document.querySelector('.calendar');
+                const currentDate = new Date();
+                const year = currentDate.getFullYear();
+                const month = currentDate.getMonth();
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-            <!-- Form Tambah Jadwal -->
-            <form action="tambah_action" method="post">
-                <label for="ship-name">Nama Kapal</label>
-                <select class="form-select" id="id_kapal" name="id_kapal" required>
-                    <option value="" disabled selected>Pilih Kapal</option>
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const date = new Date(year, month, day).toISOString().split('T')[0];
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'day';
+                    dayElement.setAttribute('data-day', date);
+                    dayElement.textContent = day;
+                    dayElement.onclick = () => selectDate(dayElement);
+                    calendarElement.appendChild(dayElement);
+                }
+            </script>
+        </div>
+
+        <!-- Form Tambah Jadwal -->
+        <form action="<?php echo site_url('jadwal_kapal/tambah_action'); ?>" method="post">
+            <div class="mb-3">
+                <label for="nama_kapal" class="form-label">Nama Kapal</label>
+                <select class="form-select" id="nama_kapal" name="id_kapal" required>
+                    <option value="" disabled selected>Pilih Nama Kapal</option>
                     <?php foreach ($kapal as $k): ?>
                         <option value="<?php echo $k->id_kapal; ?>"><?php echo $k->nama_kapal; ?></option>
                     <?php endforeach; ?>
                 </select>
+            </div>
 
-                <label for="operation-status" class="mt-3">Status Alur</label>
-                <select id="operation-status" name="status_alur" class="form-control" required>
-                    <option value="dijadwalkan">Dijadwalkan</option>
-                    <option value="masuk">Masuk</option>
-                    <option value="keluar">Keluar</option>
+            <div class="mb-3">
+                <label for="waktu_masuk" class="form-label">Waktu Masuk</label>
+                <input type="datetime-local" class="form-control" id="waktu_masuk" name="waktu_masuk" required>
+            </div>
+            <div class="mb-3">
+                <label for="waktu_keluar" class="form-label">Waktu Keluar</label>
+                <input type="datetime-local" class="form-control" id="waktu_keluar" name="waktu_keluar" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="pelabuhan_asal" class="form-label">Pelabuhan Asal</label>
+                <input type="text" class="form-control" id="pelabuhan_asal" name="pelabuhan_asal" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="pelabuhan_tujuan" class="form-label">Pelabuhan Tujuan</label>
+                <input type="text" class="form-control" id="pelabuhan_tujuan" name="pelabuhan_tujuan" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="status_alur" class="form-label">Status Alur</label>
+                <select class="form-select" id="status_alur" name="status_alur" required>
+                    <option value="" disabled selected>Pilih Status</option>
+                    <option value="Dijadwalkan">Dijadwalkan</option>
+                    <option value="Berlangsung">Berlangsung</option>
+                    <option value="Selesai">Selesai</option>
                 </select>
+            </div>
 
-                <label for="start-time" class="mt-3">Waktu Mulai</label>
-                <input type="datetime-local" id="start-time" name="waktu_masuk" class="form-control" required>
-
-                <label for="end-time" class="mt-3">Waktu Selesai</label>
-                <input type="datetime-local" id="end-time" name="waktu_keluar" class="form-control" required>
-
-                <label for="operation-type" class="mt-3">Jenis Operasi</label>
-                <select id="operation-type" name="jenis_operasi" class="form-control" required>
-                    <option value="bongkar muat">Bongkar Muat</option>
-                    <option value="pemeriksaan">Pemeriksaan</option>
-                    <option value="perawatan">Perawatan</option>
-                </select>
-
-                <button type="submit" class="btn btn-primary mt-4 w-100">Tambah Jadwal</button>
-            </form>
-        </div>
+            <div class="d-flex justify-content-between">
+                <button type="button" class="btn btn-secondary" onclick="resetSelection()">Reset Kalender</button>
+                <button type="submit" class="btn btn-primary">Tambah Jadwal</button>
+            </div>
+        </form>
     </div>
-    <script src="<?php echo base_url('assets/js/tambah_jadwal_kapal.js'); ?>"></script>
 </body>
 </html>
