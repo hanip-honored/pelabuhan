@@ -15,6 +15,7 @@ class Manajemen_Gudang extends CI_Controller {
         
         $data['keyword'] = $keyword;
         $data['gudang_data'] = $this->Gudang_model->getAllGudangData($keyword);
+        $data['logistik'] = $this->Gudang_model->getLogistikBelumMasukGudang();
         $this->load->view('manajemen_gudang/index', $data);
     }
 }

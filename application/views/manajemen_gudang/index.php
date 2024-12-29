@@ -9,53 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-        }
-
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .table-bordered {
-            border: 1px solid #ddd;
-        }
-
-        .table-bordered th,
-        .table-bordered td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
-            vertical-align: middle;
-        }
-
-        .table-striped tbody tr:nth-child(odd) {
-            background-color: #f9f9f9;
-        }
-
-        .btn {
-            margin-right: 5px;
-        }
-    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
 </head>
 <body>
     <?php $this->load->view('sidebar'); ?>
@@ -63,7 +21,11 @@
         <div class="container mt-5">
             <h1 class="text-center mb-4">Manajemen Gudang</h1>
 
-            <a href="#" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Gudang</a>
+            <a href="#" id="tambahButton" class="btn btn-success mb-3" 
+                data-bs-toggle="modal" 
+                data-bs-target="#tambahModal">
+                <i class="fas fa-plus"></i> Tambah Gudang
+            </a>
 
             <form action="manajemen_gudang" method="get" class="mb-3">
                 <div class="input-group">
@@ -71,6 +33,26 @@
                     <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Cari</button>
                 </div>
             </form>
+
+            <!-- Pesan Sukses atau Error -->
+            <?php if ($this->session->flashdata('success')): ?>
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil',
+                        text: '<?php echo $this->session->flashdata('success'); ?>'
+                    });
+                </script>
+            <?php endif; ?>
+            <?php if ($this->session->flashdata('error')): ?>
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal',
+                        text: '<?php echo $this->session->flashdata('error'); ?>'
+                    });
+                </script>
+            <?php endif; ?>
 
             <table class="table table-bordered table-striped">
                 <thead>
@@ -93,8 +75,16 @@
                                 <td><?php echo $gudang->sisa_kapasitas; ?></td>
                                 <td><?php echo $gudang->status_gudang; ?></td>
                                 <td>
-                                    <a href="#" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                    <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Hapus gudang ini?')"><i class="fas fa-trash"></i> Hapus</a>
+                                    <a href="#" id="editButton" class="btn btn-warning btn-sm" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#editModal" 
+                                        onclick="setEditData(<?php echo htmlspecialchars(json_encode($gudang), ENT_QUOTES, 'UTF-8'); ?>)">
+                                        <i class="fas fa-edit"></i>
+                                        Edit
+                                    </a>
+                                    <button data-href="aktivitas_bongkar_muat/hapusAktivitas/<?php echo $gudang->id_gudang?>" class="btn btn-danger btn-sm hapusButton">
+                                        <i class="fas fa-trash"></i> Hapus
+                                    </button>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -108,6 +98,126 @@
         </div>
     </div>
 
-    <script src="<?php echo base_url('assets/js/manajemen_gudang.js');?>"></script>
+    <!-- MODAL TAMBAH-->
+    <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tambahModalLabel">Tambah Gudang</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="tambahForm" action="manajemen_gudang/tambahGudang" method="post">
+                        <div class="mb-3">
+                            <label for="lokasi_gudang" class="form-label">Lokasi Gudang</label>
+                            <input type="text" class="form-control" id="lokasi_gudang" name="lokasi_gudang" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="kapasitas_maksimal" class="form-label">Kapasitas Maksimal</label>
+                            <input type="text" class="form-control" id="kapasitas_maksimal" name="kapasitas_maksimal" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="logistik" class="form-label">Logistik yang ingin dimuat</label>
+                            <select class="form-control logistik" id="logistik" name="logistik[]" multiple>
+                                <?php if (!empty($logistik)): ?>
+                                    <?php foreach ($logistik as $log): ?>
+                                        <option value="<?php echo $log->id_logistik; ?>" data-jumlah="<?php echo $log->jumlah_barang; ?>">
+                                            <?php echo $log->id_logistik; ?> (<?php echo $log->jumlah_barang; ?>)
+                                        </option>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <option value="" disabled>Data logistik tidak tersedia</option>
+                                <?php endif; ?>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Tambah Gudang</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL EDIT-->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Gudang</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm" action="aktivitas_bongkar_muat/updateAktivitas" method="post">
+                        <input type="hidden" id="edit_id_gudang" name="id_gudang">
+                        <div class="mb-3">
+                            <label for="edit_lokasi_gudang" class="form-label">Lokasi Gudang</label>
+                            <input type="text" class="form-control" id="edit_lokasi_gudang" name="edit_lokasi_gudang" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_kapasitas_maksimal" class="form-label">Kapasitas Maksimal</label>
+                            <input type="text" class="form-control" id="edit_kapasitas_maksimal" name="edit_kapasitas_maksimal" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit_logistik" class="form-label">Logistik yang ingin dimuat</label>
+                            <select class="form-control logistik" id="edit_logistik" name="edit_logistik[]" multiple>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Simpan Perubahan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="<?php echo base_url('assets/js/manajemen_gudang.js');?>" defer></script>
+    <script>
+        $(document).ready(function() {
+            $('.logistik').select2({
+                placeholder: "Pilih logistik",
+                allowClear: true,
+                width: '100%',
+                dropdownParent: $('#tambahModal'),
+                theme: "bootstrap-5"
+            });
+        });
+
+        $(document).ready(function () {
+            let kapasitasGudang = 0;
+            
+            $('#kapasitas_maksimal').on('input', function () {
+                kapasitasGudang = parseInt($(this).val()) || 0;
+            });
+
+            $('#logistik').on('change', function () {
+                let totalLogistik = 0;
+
+                $('#logistik option:selected').each(function () {
+                    totalLogistik += parseInt($(this).data('jumlah')) || 0;
+                });
+
+                if (totalLogistik > kapasitasGudang) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal',
+                        text: 'Total logistik melebihi kapasitas gudang!',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#d33'
+                    }).then(() => {
+                        const lastSelected = $(this).find(':selected:last');
+                        lastSelected.prop('selected', false);
+                        $('#logistik').trigger('change.select2'); 
+                    });
+                }
+            });
+
+            $('.logistik').select2({
+                placeholder: "Pilih logistik",
+                allowClear: true,
+                dropdownParent: $('#tambahModal'),
+                width: '100%',
+                theme: "bootstrap-5"
+            });
+        });
+
+    </script>
 </body>
 </html>

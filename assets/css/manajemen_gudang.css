@@ -1,67 +1,46 @@
-/* Body Styling */
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9f9f9;
     margin: 0;
     padding: 0;
-    background-color: #f4f6f9;
 }
 
-/* Outer Container Styling */
-.outer-container {
-    background-color: #ffffff; /* Background putih */
-    border-radius: 8px; /* Sudut melengkung */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Efek bayangan */
-    padding: 20px; /* Jarak di dalam container */
-    margin: 20px auto; /* Margin dari atas */
-    max-width: 1200px; /* Lebar maksimal */
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Table Styling */
-.table th, .table td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-}
-
-.table th {
-    background-color: #f8f9fa;
-    text-align: center;
+h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
 }
 
 .table {
     width: 100%;
-    margin-top: 10px;
     border-collapse: collapse;
 }
 
-/* Heading Styling */
-h2 {
-    font-weight: 600;
-    margin-bottom: 30px;
+.table-bordered {
+    border: 1px solid #ddd;
+}
+
+.table-bordered th,
+.table-bordered td {
+    border: 1px solid #ddd;
+    padding: 10px;
     text-align: center;
+    vertical-align: middle;
 }
 
-/* Button Styling */
-.btn-primary {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
+.table-striped tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
 }
 
-.btn-primary:hover {
-    background-color: #218838;
-}
-
-.btn-warning {
-    background-color: #ffc107;
-    color: white;
-    border: none;
-}
-
-.btn-danger {
-    background-color: #dc3545;
-    color: white;
-    border: none;
+.btn {
+    margin-right: 5px;
 }

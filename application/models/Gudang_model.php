@@ -38,5 +38,13 @@ class Gudang_model extends CI_Model {
         }
     
         return $result;
-    }    
+    }
+
+    public function getLogistikBelumMasukGudang() {
+        $this->db->select('logistik.id_logistik, logistik.jumlah_barang');
+        $this->db->from('logistik');
+        $this->db->join('penyimpanan_gudang', 'logistik.id_logistik = penyimpanan_gudang.id_logistik', 'left');
+        $this->db->where('penyimpanan_gudang.id_logistik IS NULL');
+        return $this->db->get()->result();
+    }
 }
