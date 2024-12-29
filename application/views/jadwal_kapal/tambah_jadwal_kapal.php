@@ -134,9 +134,9 @@
                 <label for="status_alur" class="form-label">Status Alur</label>
                 <select class="form-select" id="status_alur" name="status_alur" required>
                     <option value="" disabled selected>Pilih Status</option>
-                    <option value="Dijadwalkan">Dijadwalkan</option>
-                    <option value="Berlangsung">Berlangsung</option>
-                    <option value="Selesai">Selesai</option>
+                    <option value="dijadwalkan">Dijadwalkan</option>
+                    <option value="proses">Proses</option>
+                    <option value="selesai">Selesai</option>
                 </select>
             </div>
 

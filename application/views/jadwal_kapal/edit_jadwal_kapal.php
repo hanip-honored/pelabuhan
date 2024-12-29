@@ -110,9 +110,11 @@
         <div class="mb-3">
             <label for="nama_kapal" class="form-label">Nama Kapal</label>
             <select class="form-select" id="nama_kapal" name="id_kapal" required>
-                <option value="" disabled selected>Pilih Nama Kapal</option>
+                <option value="<?php echo $alur_kapal[0]->nama_kapal ?>" selected><?php echo $alur_kapal[0]->nama_kapal ?></option>
                 <?php foreach ($kapal as $k): ?>
-                    <option value="<?php echo $k->id_kapal; ?>"><?php echo $k->nama_kapal; ?></option>
+                    <?php if ($k->nama_kapal != $alur_kapal[0]->nama_kapal): ?>
+                        <option value="<?php echo $k->id_kapal; ?>"><?php echo $k->nama_kapal; ?></option>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -120,36 +122,42 @@
         <!-- Input Waktu Masuk -->
         <div class="mb-3">
             <label for="waktu_masuk" class="form-label">Waktu Masuk</label>
-            <input type="datetime-local" class="form-control" id="waktu_masuk" name="waktu_masuk" required>
+            <input type="datetime-local" class="form-control" id="waktu_masuk" name="waktu_masuk" value="<?php echo $alur_kapal[0]->waktu_masuk ?>" required>
         </div>
 
         <!-- Input Waktu Keluar -->
         <div class="mb-3">
             <label for="waktu_keluar" class="form-label">Waktu Keluar</label>
-            <input type="datetime-local" class="form-control" id="waktu_keluar" name="waktu_keluar" required>
+            <input type="datetime-local" class="form-control" id="waktu_keluar" name="waktu_keluar" value="<?php echo $alur_kapal[0]->waktu_keluar ?>" required>
         </div>
 
         <!-- Input Pelabuhan Asal -->
         <div class="mb-3">
             <label for="pelabuhan_asal" class="form-label">Pelabuhan Asal</label>
-            <input type="text" class="form-control" id="pelabuhan_asal" name="pelabuhan_asal" required>
+            <input type="text" class="form-control" id="pelabuhan_asal" name="pelabuhan_asal" value="<?php echo $alur_kapal[0]->pelabuhan_asal ?>" required>
         </div>
 
         <!-- Input Pelabuhan Tujuan -->
         <div class="mb-3">
             <label for="pelabuhan_tujuan" class="form-label">Pelabuhan Tujuan</label>
-            <input type="text" class="form-control" id="pelabuhan_tujuan" name="pelabuhan_tujuan" required>
+            <input type="text" class="form-control" id="pelabuhan_tujuan" name="pelabuhan_tujuan" value="<?php echo $alur_kapal[0]->pelabuhan_tujuan ?>" required>
         </div>
 
         <!-- Input Status Alur -->
         <div class="mb-3">
             <label for="status_alur" class="form-label">Status Alur</label>
             <select class="form-select" id="status_alur" name="status_alur" required>
-                <option value="" disabled selected>Pilih Status</option>
-                <option value="Dijadwalkan">Dijadwalkan</option>
-                <option value="Berlangsung">Berlangsung</option>
-                <option value="Selesai">Selesai</option>
-            </select>
+                    <option value="<?php echo $alur_kapal[0]->status_alur; ?>" selected><?php echo ucfirst($alur_kapal[0]->status_alur); ?></option>
+                    <?php if ($alur_kapal[0]->status_alur != 'dijadwalkan'): ?>
+                        <option value="dijadwalkan">Dijadwalkan</option>
+                    <?php endif; ?>
+                    <?php if ($alur_kapal[0]->status_alur != 'proses'): ?>
+                        <option value="proses">Proses</option>
+                    <?php endif; ?>
+                    <?php if ($alur_kapal[0]->status_alur != 'selesai'): ?>
+                        <option value="selesai">Selesai</option>
+                    <?php endif; ?>
+                </select>
         </div>
 
         <!-- Buttons -->

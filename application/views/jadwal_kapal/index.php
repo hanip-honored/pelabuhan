@@ -76,12 +76,12 @@
                     <td><?php echo $jadwal->pelabuhan_tujuan; ?></td>
                     <td><?php echo $jadwal->status_alur; ?></td>
                     <td>
-                    <a href="<?php echo site_url('jadwal_kapal/edit/' . $jadwal->id_jadwal); ?>" class="btn btn-warning btn-sm">
+                    <a href="<?php echo site_url('jadwal_kapal/edit/' . $jadwal->id_alur); ?>" class="btn btn-warning btn-sm">
                         <i class="fas fa-edit"></i> Edit
                     </a>
-                    <button data-href="jadwal_kapal/hapus/<?php $jadwal->id_jadwal; ?>" class="btn btn-danger btn-sm hapusButton">
+                    <a href="jadwal_kapal/hapus/<?php echo $jadwal->id_alur; ?>" class="btn btn-danger btn-sm hapusButton">
                         <i class="fas fa-trash"></i> Hapus
-                    </button>
+                    </a>
                     </td>
                 </tr>
                 <?php $no++; endforeach; ?>

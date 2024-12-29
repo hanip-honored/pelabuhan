@@ -9,7 +9,7 @@ class Jadwal_model extends CI_Model {
     }
     
     public function getDataKapal($keyword = null) {
-        $this->db->select('jadwal.id_jadwal, kapal.nama_kapal, alur_kapal.waktu_masuk, alur_kapal.waktu_keluar, alur_kapal.pelabuhan_asal, alur_kapal.pelabuhan_tujuan, alur_kapal.status_alur');
+        $this->db->select('alur_kapal.id_alur, jadwal.id_jadwal, kapal.nama_kapal, alur_kapal.waktu_masuk, alur_kapal.waktu_keluar, alur_kapal.pelabuhan_asal, alur_kapal.pelabuhan_tujuan, alur_kapal.status_alur');
         $this->db->from('jadwal');
         $this->db->join('kapal', 'jadwal.id_kapal = kapal.id_kapal', 'left');
         $this->db->join('alur_kapal', 'jadwal.id_kapal = alur_kapal.id_kapal', 'left');
@@ -37,12 +37,7 @@ class Jadwal_model extends CI_Model {
     }    
 
     public function getLastIdAlur() {
-        $this->db->select_max('id_alur');
-        $result = $this->db->get('alur_kapal')->row();
-        if ($result && $result->id_alur) {
-            return intval(substr($result->id_alur, 2));
-        }
-        return 0;
+        return $this->db->get('alur_kapal')->num_rows();
     }    
 
     public function tambah_action() {
@@ -75,21 +70,20 @@ class Jadwal_model extends CI_Model {
     }    
 
     public function getJadwalById($id) {
-        $this->db->select('jadwal.id_jadwal, jadwal.id_kapal, kapal.nama_kapal, alur_kapal.waktu_masuk, alur_kapal.waktu_keluar, alur_kapal.pelabuhan_asal, alur_kapal.pelabuhan_tujuan, alur_kapal.status_alur');
-        $this->db->from('jadwal');
-        $this->db->join('kapal', 'jadwal.id_kapal = kapal.id_kapal', 'left');
-        $this->db->join('alur_kapal', 'jadwal.id_kapal = alur_kapal.id_kapal', 'left');
-        $this->db->where('jadwal.id_jadwal', $id);
-        return $this->db->get()->row();
+        $this->db->select('alur_kapal.*, kapal.nama_kapal');
+        $this->db->from('alur_kapal');
+        $this->db->join('kapal', 'alur_kapal.id_kapal = kapal.id_kapal');
+        $this->db->where('alur_kapal.id_alur', $id);
+        return $this->db->get()->result();
     }
 
     public function updateJadwal($id, $data) {
-        $this->db->where('id_jadwal', $id);
+        $this->db->where('id_alur', $id);
         return $this->db->update('alur_kapal', $data);
     }
 
     public function deleteJadwal($id) {
-        $this->db->where('id_jadwal', $id);
+        $this->db->where('id_alur', $id);
         if ($this->db->delete('alur_kapal')) {
             return true;
         } else {

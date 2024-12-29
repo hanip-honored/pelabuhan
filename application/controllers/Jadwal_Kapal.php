@@ -45,10 +45,10 @@ class Jadwal_Kapal extends CI_Controller {
     }        
 
     public function edit($id) {
-        $data['jadwal'] = $this->Jadwal_model->getJadwalById($id);
+        $data['alur_kapal'] = $this->Jadwal_model->getJadwalById($id);
         $data['kapal'] = $this->Jadwal_model->getAllKapal();
     
-        if (!$data['jadwal']) {
+        if (empty($data['alur_kapal'])) {
             $this->session->set_flashdata('error', 'Data tidak ditemukan.');
             redirect('jadwal_kapal');
         }
@@ -57,7 +57,7 @@ class Jadwal_Kapal extends CI_Controller {
     }    
 
     public function edit_action() {
-        $id = $this->input->post('id_jadwal');
+        $id = $this->input->post('id_alur');
     
         $data = [
             'id_kapal' => $this->input->post('id_kapal'),
@@ -78,11 +78,6 @@ class Jadwal_Kapal extends CI_Controller {
     }    
 
     public function hapus($id) {
-        if (!$this->Jadwal_model->getJadwalById($id)) {
-            $this->session->set_flashdata('error', 'Data tidak ditemukan.');
-            redirect('jadwal_kapal');
-        }
-    
         if ($this->Jadwal_model->deleteJadwal($id)) {
             $this->session->set_flashdata('success', 'Data berhasil dihapus.');
         } else {
