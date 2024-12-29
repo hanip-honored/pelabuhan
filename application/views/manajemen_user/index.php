@@ -52,7 +52,12 @@
                                 <td><?php echo $user->nama_user; ?></td>
                                 <td><?php echo $user->level; ?></td>
                                 <td><?php echo $user->username; ?></td>
-                                <td><?php echo $user->password; ?></td>
+                                <td>
+                                <div class="password-container">
+                                        <input type="password" value="<?php echo $user->password; ?>" class="hidden-input" readonly>
+                                        <i class="fas fa-eye" onclick="togglePassword(this)"></i>
+                                    </div>
+                                </td>
                                 <td>
                                     <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal" onclick="setEditData(<?php echo htmlspecialchars(json_encode($user), ENT_QUOTES, 'UTF-8'); ?>)">
                                         <i class="fas fa-edit"></i> Edit
@@ -135,8 +140,21 @@
                 </div>
             </div>
         </div>
-
     </div>
+    <script>
+        function togglePassword(element) {
+            const input = element.previousElementSibling;
+            if (input.type === "password") {
+                input.type = "text";
+                element.classList.remove("fa-eye");
+                element.classList.add("fa-eye-slash");
+            } else {
+                input.type = "password";
+                element.classList.remove("fa-eye-slash");
+                element.classList.add("fa-eye");
+            }
+        }
+    </script>
     <script src="<?php echo base_url('assets/js/manajemen_user.js'); ?>" defer></script>
 </body>
 </html>

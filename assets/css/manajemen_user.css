@@ -65,3 +65,24 @@ h1 {
     border-color: #dc3545;
     color: #fff;
 }
+
+.password-container {
+    position: relative;
+}
+.password-container input {
+    padding-right: 30px;
+}
+.password-container i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.hidden-input {
+    border: none;
+    background: none;
+    padding: 0;
+    font-size: inherit;
+    color: inherit;
+}
