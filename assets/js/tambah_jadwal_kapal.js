@@ -1,62 +1,74 @@
-const calendarDates = document.getElementById("calendar-dates");
-const monthYear = document.getElementById("month-year");
-let currentDate = new Date();
+let startDate = null;
+let endDate = null;
+let currentYear = new Date().getFullYear();
+let currentMonth = new Date().getMonth();
 
-function generateCalendar(date) {
-    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
-    const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+function renderCalendar() {
+    const calendarElement = document.querySelector('.calendar');
+    const monthLabel = document.querySelector('.month-label');
+    calendarElement.innerHTML = '';
 
-    calendarDates.innerHTML = "";
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    monthLabel.textContent = `${new Date(currentYear, currentMonth).toLocaleString('default', { month: 'long' })} ${currentYear}`;
 
-    // Fill empty slots before the first day
-    for (let i = 0; i < firstDay; i++) {
-        const emptyDiv = document.createElement("div");
-        calendarDates.appendChild(emptyDiv);
-    }
-
-    // Fill days of the month
     for (let day = 1; day <= daysInMonth; day++) {
-        const dayDiv = document.createElement("div");
-        dayDiv.textContent = day;
-        dayDiv.dataset.date = new Date(date.getFullYear(), date.getMonth(), day).toISOString();
-        calendarDates.appendChild(dayDiv);
+        const date = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const dayElement = document.createElement('div');
+        dayElement.className = 'day';
+        dayElement.setAttribute('data-day', date);
+        dayElement.textContent = day;
+        dayElement.onclick = () => selectDate(dayElement);
+        calendarElement.appendChild(dayElement);
     }
-
-    monthYear.textContent = date.toLocaleString("default", { month: "long", year: "numeric" });
+    highlightDates();
 }
 
-function highlightRange() {
-    const startTime = new Date(document.getElementById("start-time").value || null);
-    const endTime = new Date(document.getElementById("end-time").value || null);
+function changeMonth(offset) {
+    currentMonth += offset;
+    if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+    } else if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+    }
+    renderCalendar();
+}
 
-    const dayElements = calendarDates.querySelectorAll("div");
-    dayElements.forEach((day) => {
-        const dayDate = new Date(day.dataset.date || null);
-        day.classList.remove("selected", "in-range");
+function selectDate(dayElement) {
+    const day = dayElement.getAttribute('data-day');
 
-        if (dayDate.toDateString() === startTime.toDateString()) {
-            day.classList.add("selected");
-        } else if (endTime && dayDate >= startTime && dayDate <= endTime) {
-            day.classList.add("in-range");
+    if (!startDate) {
+        startDate = day;
+        endDate = day;
+    } else if (new Date(day) < new Date(startDate)) {
+        startDate = day;
+    } else {
+        endDate = day;
+    }
+
+    highlightDates();
+    document.getElementById('waktu_masuk').value = `${startDate}T00:00`;
+    document.getElementById('waktu_keluar').value = `${endDate}T23:59`;
+}
+
+function highlightDates() {
+    const days = document.querySelectorAll('.calendar .day');
+    days.forEach(day => {
+        const currentDay = day.getAttribute('data-day');
+        day.classList.remove('selected');
+        if (startDate && endDate && currentDay >= startDate && currentDay <= endDate) {
+            day.classList.add('selected');
         }
     });
 }
 
-// Event listeners
-document.getElementById("start-time").addEventListener("change", highlightRange);
-document.getElementById("end-time").addEventListener("change", highlightRange);
+function resetSelection() {
+    startDate = null;
+    endDate = null;
+    highlightDates();
+    document.getElementById('waktu_masuk').value = '';
+    document.getElementById('waktu_keluar').value = '';
+}
 
-document.getElementById("prev-month").addEventListener("click", () => {
-    currentDate.setMonth(currentDate.getMonth() - 1);
-    generateCalendar(currentDate);
-    highlightRange();
-});
-
-document.getElementById("next-month").addEventListener("click", () => {
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    generateCalendar(currentDate);
-    highlightRange();
-});
-
-// Initialize
-generateCalendar(currentDate);
+document.addEventListener("DOMContentLoaded", renderCalendar);

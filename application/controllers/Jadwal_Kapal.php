@@ -77,7 +77,20 @@ class Jadwal_Kapal extends CI_Controller {
         redirect('jadwal_kapal');
     }    
 
-    public function hapus($id) {
+    public function hapus($id = null) {
+        if (empty($id)) {
+            $this->session->set_flashdata('error', 'ID tidak ditemukan.');
+            redirect('jadwal_kapal');
+            return;
+        }
+    
+        $data = $this->Jadwal_model->getJadwalById($id);
+        if (empty($data)) {
+            $this->session->set_flashdata('error', 'Data tidak ditemukan.');
+            redirect('jadwal_kapal');
+            return;
+        }
+    
         if ($this->Jadwal_model->deleteJadwal($id)) {
             $this->session->set_flashdata('success', 'Data berhasil dihapus.');
         } else {
@@ -85,5 +98,4 @@ class Jadwal_Kapal extends CI_Controller {
         }
         redirect('jadwal_kapal');
     }    
-    
 }

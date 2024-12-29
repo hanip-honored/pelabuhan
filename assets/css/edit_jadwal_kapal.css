@@ -1,0 +1,23 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-bottom: 20px;
+}
+.calendar .day {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #f9f9f9;
+}
+.calendar .day:hover {
+    background-color: #e0e0e0;
+}
+.calendar .selected {
+    background-color: #007bff;
+    color: #fff;
+}

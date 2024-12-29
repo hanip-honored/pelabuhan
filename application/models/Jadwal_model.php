@@ -83,11 +83,6 @@ class Jadwal_model extends CI_Model {
     }
 
     public function deleteJadwal($id) {
-        $this->db->where('id_alur', $id);
-        if ($this->db->delete('alur_kapal')) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+        return $this->db->delete('alur_kapal', ['id_alur' => $id]);
+    }    
 }

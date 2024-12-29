@@ -79,7 +79,7 @@
                     <a href="<?php echo site_url('jadwal_kapal/edit/' . $jadwal->id_alur); ?>" class="btn btn-warning btn-sm">
                         <i class="fas fa-edit"></i> Edit
                     </a>
-                    <a href="jadwal_kapal/hapus/<?php echo $jadwal->id_alur; ?>" class="btn btn-danger btn-sm hapusButton">
+                    <a href="#" class="btn btn-danger btn-sm hapusButton" data-href="<?php echo site_url('jadwal_kapal/hapus/' . $jadwal->id_alur); ?>">
                         <i class="fas fa-trash"></i> Hapus
                     </a>
                     </td>
@@ -94,7 +94,6 @@
         </table>
     </div>
 </div>
-
 <script src="<?php echo base_url('assets/js/jadwal_kapal.js'); ?>" defer></script>
 </body>
 </html>
