@@ -10,9 +10,18 @@
 </head>
 <body>
     <div class="container mt-5">
+        <a href="<?php echo site_url('jadwal_kapal'); ?>" class="btn btn-secondary mb-3">Kembali</a>
         <h1 class="text-center mb-4">Edit Jadwal Kapal</h1>
-
-        <div class="calendar"></div>
+        
+        <!-- Kalender -->
+        <div class="calendar-container">
+            <div class="month-navigation">
+                <button onclick="changeMonth(-1)">&#9664; Sebelumnya</button>
+                <span class="month-label"></span>
+                <button onclick="changeMonth(1)">Berikutnya &#9654;</button>
+            </div>
+            <div class="calendar"></div>
+        </div>
 
         <form action="<?php echo site_url('jadwal_kapal/edit_action'); ?>" method="post">
             <input type="hidden" name="id_alur" value="<?php echo $alur_kapal[0]->id_alur; ?>">
@@ -66,7 +75,7 @@
             </div>
 
             <div class="d-flex justify-content-between">
-                <button type="button" class="btn btn-secondary" onclick="resetSelection()">Reset Kalender</button>
+                <button type="button" class="btn btn-warning" onclick="resetSelection()">Reset Kalender</button>
                 <button type="submit" class="btn btn-primary">Simpan Jadwal</button>
             </div>
         </form>

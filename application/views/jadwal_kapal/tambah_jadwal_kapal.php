@@ -10,8 +10,8 @@
 </head>
 <body>
     <div class="container mt-5">
+        <a href="<?php echo site_url('jadwal_kapal'); ?>" class="btn btn-secondary mb-3">Kembali</a>
         <h1 class="text-center mb-4">Tambah Jadwal Kapal</h1>
-        <a href="<?php echo site_url('jadwal_kapal'); ?>" class="btn btn-secondary mb-3">Kembali ke Halaman Index</a>
 
         <!-- Kalender -->
         <div class="calendar-container">
@@ -65,7 +65,7 @@
             </div>
 
             <div class="d-flex justify-content-between">
-                <button type="button" class="btn btn-secondary" onclick="resetSelection()">Reset Kalender</button>
+                <button type="button" class="btn btn-warning" onclick="resetSelection()">Reset Kalender</button>
                 <button type="submit" class="btn btn-primary">Tambah Jadwal</button>
             </div>
         </form>
