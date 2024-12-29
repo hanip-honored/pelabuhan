@@ -57,6 +57,7 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
+                        <th>No</th>
                         <th>Lokasi Gudang</th>
                         <th>Kapasitas Maksimal</th>
                         <th>Total Terisi</th>
@@ -66,9 +67,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if (!empty($gudang_data)): ?>
+                    <?php $no = 1; 
+                        if (!empty($gudang_data)): ?>
                         <?php foreach ($gudang_data as $gudang): ?>
                             <tr>
+                                <td><?php echo $no;?></td>
                                 <td><?php echo $gudang->lokasi_gudang; ?></td>
                                 <td><?php echo $gudang->kapasitas_gudang; ?></td>
                                 <td><?php echo $gudang->total_terisi; ?></td>
@@ -87,6 +90,7 @@
                                     </button>
                                 </td>
                             </tr>
+                            <?php $no++; ?>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>

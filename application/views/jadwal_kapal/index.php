@@ -68,7 +68,7 @@
                     if (isset($jadwall) && !empty($jadwall)): ?>
                 <?php foreach ($jadwall as $jadwal): ?>
                 <tr>
-                <td><?php echo $no++;?></td>
+                    <td><?php echo $no;?></td>
                     <td><?php echo $jadwal->nama_kapal; ?></td>
                     <td><?php echo $jadwal->waktu_masuk; ?></td>
                     <td><?php echo $jadwal->waktu_keluar; ?></td>

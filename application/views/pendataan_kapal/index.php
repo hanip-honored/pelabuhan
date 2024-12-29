@@ -55,6 +55,7 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
+                    <th>No</th>
                     <th>Nama Kapal</th>
                     <th>Jenis Kapal</th>
                     <th>Gambar Kapal</th>
@@ -69,6 +70,7 @@
                     if (isset($ships) && !empty($ships)): ?>
                 <?php foreach ($ships as $ship): ?>
                 <tr>
+                    <td><?php echo $no; ?></td>
                     <td><?php echo $ship->nama_kapal; ?></td>
                     <td><?php echo $ship->jenis_kapal; ?></td>
                     <td><img src="<?php echo base_url('assets/images/ships/' . $ship->gambar_kapal); ?>" alt="Ship Image" class="ship-image"></td>
