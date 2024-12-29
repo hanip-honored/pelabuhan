@@ -1,6 +1,6 @@
 const apiKey = 'd70c5533a8e41ed1d86108e7f999df6a';
 const weatherLocation = 'Yogyakarta';
-const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
 
 async function fetchWeather() {
     try {
