@@ -123,4 +123,9 @@ class Manajemen_Gudang extends CI_Controller {
         }
         redirect('manajemen_gudang');
     }
+
+    public function getKapalLogistik($id_kapal) {
+        $kapal = $this->Gudang_model->getKapalLogistik($id_kapal);
+        echo json_encode($kapal);
+    }
 }

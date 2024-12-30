@@ -122,6 +122,10 @@ class Gudang_model extends CI_Model {
         return $this->db->get('kapal')->result();
     }
 
+    public function getKapalLogistik($id_kapal) {
+        return $this->db->get_where('kapal', ['id_kapal' => $id_kapal])->result();
+    }
+
     public function deleteLogistik($id_logistik) {
         $this->db->where('id_logistik', $id_logistik);
         return $this->db->delete('logistik');

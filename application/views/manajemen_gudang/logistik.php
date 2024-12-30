@@ -133,7 +133,7 @@
             </div>
             <div class="modal-body">
                 <form id="editForm" action="aktivitas_bongkar_muat/updateAktivitas" method="post">
-                    <input type="hidden" id="edit_id_logistik" name="id_gudang">
+                    <input type="hidden" id="edit_id_logistik" name="id_logistik">
                     <div class="mb-3">
                         <label for="edit_kapal" class="form-label">Nama Kapal</label>
                         <select class="form-control" name="edit_kapal" id="edit_kapal" required>

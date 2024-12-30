@@ -70,3 +70,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });    
 })
+
+//LOGISTIK
+function setEditDataLogistik(logistik) {
+    document.getElementById('edit_id_logistik').value = logistik.id_logistik;
+    document.getElementById('edit_jenis_barang').value = logistik.jenis_barang;
+    document.getElementById('edit_jumlah_barang').value = logistik.jumlah_barang;
+    document.getElementById('edit_status_logistik').value = logistik.status_logistik;
+
+    $.ajax({
+        url: 'manajemen_gudang/getKapalLogistik/' + logistik.id_kapal,
+        method: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            document.getElementById('edit_kapal').value = data[0].id_kapal;
+        },
+        error: function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: 'Tidak dapat memuat data kapal.'
+            });
+        }
+    })
+}
