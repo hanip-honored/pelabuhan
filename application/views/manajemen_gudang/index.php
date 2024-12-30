@@ -70,13 +70,18 @@
                     <?php $no = 1; 
                         if (!empty($gudang_data)): ?>
                         <?php foreach ($gudang_data as $gudang): ?>
+                            <?php if ($gudang->total_terisi == $gudang->kapasitas_gudang) {
+                                $status = 'penuh';
+                            } else {
+                                $status = 'tersedia';
+                            }?>
                             <tr>
                                 <td><?php echo $no;?></td>
                                 <td><?php echo $gudang->lokasi_gudang; ?></td>
                                 <td><?php echo $gudang->kapasitas_gudang; ?></td>
                                 <td><?php echo $gudang->total_terisi; ?></td>
                                 <td><?php echo $gudang->sisa_kapasitas; ?></td>
-                                <td><?php echo $gudang->status_gudang; ?></td>
+                                <td><?php echo $status; ?></td>
                                 <td>
                                     <a href="#" id="editButton" class="btn btn-warning btn-sm" 
                                         data-bs-toggle="modal" 
@@ -85,7 +90,7 @@
                                         <i class="fas fa-edit"></i>
                                         Edit
                                     </a>
-                                    <button data-href="aktivitas_bongkar_muat/hapusAktivitas/<?php echo $gudang->id_gudang?>" class="btn btn-danger btn-sm hapusButton">
+                                    <button data-href="manajemen_gudang/hapus_gudang/<?php echo $gudang->id_gudang?>" class="btn btn-danger btn-sm hapusButton">
                                         <i class="fas fa-trash"></i> Hapus
                                     </button>
                                 </td>
@@ -100,6 +105,8 @@
                 </tbody>
             </table>
         </div>
+
+        <?php  $this->load->view('manajemen_gudang/logistik.php'); ?>
     </div>
 
     <!-- MODAL TAMBAH-->
@@ -111,14 +118,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="tambahForm" action="manajemen_gudang/tambahGudang" method="post">
+                    <form id="tambahForm" action="manajemen_gudang/tambah_gudang" method="post">
                         <div class="mb-3">
                             <label for="lokasi_gudang" class="form-label">Lokasi Gudang</label>
                             <input type="text" class="form-control" id="lokasi_gudang" name="lokasi_gudang" required>
                         </div>
                         <div class="mb-3">
-                            <label for="kapasitas_maksimal" class="form-label">Kapasitas Maksimal</label>
-                            <input type="text" class="form-control" id="kapasitas_maksimal" name="kapasitas_maksimal" required>
+                            <label for="kapasitas_gudang" class="form-label">Kapasitas Maksimal</label>
+                            <input type="text" class="form-control" id="kapasitas_gudang" name="kapasitas_gudang" required>
                         </div>
                         <div class="mb-3">
                             <label for="logistik" class="form-label">Logistik yang ingin dimuat</label>
@@ -150,7 +157,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="editForm" action="aktivitas_bongkar_muat/updateAktivitas" method="post">
+                    <form id="editForm" action="manajemen_gudang/updateGudangLogistik" method="post">
                         <input type="hidden" id="edit_id_gudang" name="id_gudang">
                         <div class="mb-3">
                             <label for="edit_lokasi_gudang" class="form-label">Lokasi Gudang</label>
@@ -162,7 +169,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="edit_logistik" class="form-label">Logistik yang ingin dimuat</label>
-                            <select class="form-control logistik" id="edit_logistik" name="edit_logistik[]" multiple>
+                            <select class="form-control edit_logistik" id="edit_logistik" name="edit_logistik[]" multiple>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Simpan Perubahan</button>
@@ -173,6 +180,8 @@
     </div>
 
     <script src="<?php echo base_url('assets/js/manajemen_gudang.js');?>" defer></script>
+    <script> const availableLogistik = <?php echo json_encode($logistik); ?>; </script>
+
     <script>
         $(document).ready(function() {
             $('.logistik').select2({
@@ -183,11 +192,21 @@
                 theme: "bootstrap-5"
             });
         });
+        
+        $(document).ready(function() {
+            $('.edit_logistik').select2({
+                placeholder: "Pilih logistik",
+                allowClear: true,
+                width: '100%',
+                dropdownParent: $('#editModal'),
+                theme: "bootstrap-5"
+            });
+        });
 
         $(document).ready(function () {
             let kapasitasGudang = 0;
             
-            $('#kapasitas_maksimal').on('input', function () {
+            $('#kapasitas_gudang').on('input', function () {
                 kapasitasGudang = parseInt($(this).val()) || 0;
             });
 
