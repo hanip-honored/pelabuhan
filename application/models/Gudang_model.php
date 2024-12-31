@@ -105,7 +105,8 @@ class Gudang_model extends CI_Model {
         return $this->db->insert('penyimpanan_gudang', [
             'id_penyimpanan' => 'PG' . sprintf("%04s", $this->db->get('penyimpanan_gudang')->num_rows() + 1),
             'id_gudang' => $id_gudang,
-            'id_logistik' => $id_logistik
+            'id_logistik' => $id_logistik,
+            'waktu_masuk_gudang' => date('Y-m-d H:i:s')
         ]);
     }
     
