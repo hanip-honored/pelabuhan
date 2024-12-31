@@ -58,7 +58,7 @@ class Gudang_model extends CI_Model {
 
     public function insertDataLogistikGudang($id_gudang, $id_logistik) {
         $data = [
-            'id_penyimpanan' => 'P' . sprintf("%04s", $this->db->get('penyimpanan_gudang')->num_rows() + 1),
+            'id_penyimpanan' => 'PG' . sprintf("%04s", $this->db->get('penyimpanan_gudang')->num_rows() + 1),
             'id_gudang' => $id_gudang,
             'id_logistik' => $id_logistik,
             'waktu_masuk_gudang' => date('Y-m-d H:i:s'),
@@ -103,6 +103,7 @@ class Gudang_model extends CI_Model {
     
     public function insertLogistikPenyimpanan($id_gudang, $id_logistik) {
         return $this->db->insert('penyimpanan_gudang', [
+            'id_penyimpanan' => 'PG' . sprintf("%04s", $this->db->get('penyimpanan_gudang')->num_rows() + 1),
             'id_gudang' => $id_gudang,
             'id_logistik' => $id_logistik
         ]);
