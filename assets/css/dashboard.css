@@ -1,190 +1,164 @@
-/* Global Styles */
 body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background-color: #F4F5FA;
-    display: flex;
-    color: #333;
-}
-
-h2, h3, h4, p {
-    margin: 0;
-}
-
-/* Sidebar */
-.sidebar {
-    width: 280px;
-    background-color: #F4F5FA;
-    height: 100vh;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    position: fixed; /* Membuat sidebar tetap di tempat */
-    top: 0; /* Menempel di bagian atas halaman */
-    left: 0; /* Menempel di bagian kiri halaman */
-    z-index: 1000;
-}
-
-.profile {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.profile img {
-    width: 80px;
-    border-radius: 50%;
-    border: 2px solid #ff8a80;
-    margin-bottom: 10px;
-}
-
-.profile h3 {
-    font-size: 18px;
-    color: #ff8a80;
-}
-
-ul {
-    list-style: none;
-    padding: 0;
-    padding-left: 0 !important;
-    align-items: start;
-    margin: 0;
-}
-
-ul li {
-    margin-bottom: 15px;
-}
-
-ul li a {
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 15px;
-    border-radius: 10px;
-    transition: background-color 0.3s, color 0.3s;
-    color: #333;
-}
-
-ul li.active a, ul li a:hover {
-    background-color: #ff8a80;
-    color: white;
-}
-
-ul li a i {
-    font-size: 18px;
-}
-
-
-/* Main Content */
-.main-content {
-    margin-left: 280px;
-    flex: 1;
-    padding: 30px;
-    background-color: #F4F5FA;
-}
-
-header {
-    margin-bottom: 20px;
-}
-
-header h2 {
-    font-size: 24px;
-    color: #ff8a80;
-    margin-bottom: 5px;
-}
-
-header p {
-    font-size: 16px;
-    color: #666;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .sidebar {
-        position: fixed;
-        z-index: 10;
-        transform: translateX(-100%);
-        transition: transform 0.3s;
-    }
-
-    .sidebar.open {
-        transform: translateX(0);
-    }
-
-    .main-content {
-        padding: 20px;
-    }
-}
-
-.menu-toggle {
-    display: none;
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 20;
-    background: #ff8a80;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 18px;
-}
-
-.menu-toggle i {
-    font-size: 18px;
-}
-
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-    }
-}
-
-.chart-item {
-    width: 200px;
-    text-align: center;
-}
-
-.chart-item canvas {
-    width: 100%;
-    height: auto;
-}
-
-.temp-icon-container {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Jarak antara ikon dan suhu */
-}
-
-.temp-icon-container img {
-    margin-right: 20px; /* Atur jarak antara ikon cuaca dan suhu */
-}
-
-.temp-icon-container .temp-day-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.temp-day {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Jarak antara suhu dan hari */
-}
-
-.temp-icon-container h1 {
-    margin: 0;
-}
-
-.temp-icon-container h4 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #7f8c8d;
-}
-
-.temp-icon-container p {
-    margin: 0;
-    font-size: 1rem;
-    color: #7f8c8d;
-}
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header img {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+        }
+        .header .location {
+            text-align: center;
+        }
+        .header .location h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .header .location p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #888;
+        }
+        .header .weather {
+            text-align: center;
+        }
+        .header .weather h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .header .weather p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #888;
+        }
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+        .menu .menu-item {
+            text-align: center;
+        }
+        .menu .menu-item .icon {
+            width: 50px;
+            height: 50px;
+            background-color: #ff6b6b;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        .menu .menu-item i {
+            font-size: 20px;
+            color: #fff;
+        }
+        .menu .menu-item p {
+            margin: 10px 0 0;
+            font-size: 14px;
+            color: #333;
+        }
+        .visualization {
+            text-align: center;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        .visualization h2 {
+            margin: 0 0 20px;
+            font-size: 18px;
+            font-weight: 700;
+        }
+        .chart-container {
+            width: 60%;
+            display: flex;
+            justify-content: space-around;
+            gap: 20px;
+            margin: 0 auto;
+        }
+        .chart-item {
+            width: 150px;
+            height: 150px;
+        }
+        .content {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            gap: 20px;
+        }
+        .summary {
+            width: 48%;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .summary .summary-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: calc(50% - 10px);
+        }
+        .summary .summary-item h3 {
+            margin: 0 0 10px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .summary .summary-item p {
+            margin: 0;
+            font-size: 14px;
+            color: #888;
+        }
+        .ship-status {
+            width: 48%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .ship-status table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .ship-status th, .ship-status td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .ship-status th {
+            background-color: #f5f5f5;
+            font-weight: 700;
+        }
+        .ship-status td.status {
+            text-align: right;
+        }
+        .status.keluar {
+            color: red;
+        }
+        .status.masuk {
+            color: green;
+        }
+        .status.sedang-bongkar {
+            color: orange;
+        }
