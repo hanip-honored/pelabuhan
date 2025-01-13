@@ -40,7 +40,7 @@
                 <div class="icon">
                     <i class="fas fa-boxes"></i>
                 </div>
-                <p>Aktivitas Bongkar Muat</p>
+                <p>Aktivitas Bongkar Muat y</p>
             </div>
             <div class="menu-item">
                 <div class="icon">
