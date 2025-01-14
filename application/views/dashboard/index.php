@@ -29,30 +29,44 @@
             </div>
         </div>
         <div class="menu">
-            <a href="<?php echo site_url('jadwal_kapal'); ?>" class="menu-item">
-                <div class="icon">
-                    <i class="fas fa-ship"></i>
-                </div>
-                <p>Jadwal Kapal</p>
-            </a>
-            <a href="pendataan_kapal" class="menu-item">
-                <div class="icon">
-                    <i class="fas fa-clipboard-list"></i>
-                </div>
-                <p>Pendataan Kapal</p>
-            </a>
-            <a href="aktivitas_bongkar_muat" class="menu-item">
-                <div class="icon">
-                    <i class="fas fa-boxes"></i>
-                </div>
-                <p>Aktivitas Bongkar Muat</p>
-            </a>
-            <a href="manajemen_gudang" class="menu-item">
-                <div class="icon">
-                    <i class="fas fa-warehouse"></i>
-                </div>
-                <p>Manajemen Gudang</p>
-            </a>
+            <?php if ($_SESSION['level'] == 'admin'): ?>
+                <a href="<?php echo site_url('manajemen_user'); ?>" class="menu-item">
+                    <div class="icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <p>Manajemen User</p>
+                </a>
+            <?php endif; ?>
+
+            <?php if ($_SESSION['level'] == 'admin' || $_SESSION['level'] == 'petugas kapal'): ?>
+                <a href="<?php echo site_url('jadwal_kapal'); ?>" class="menu-item">
+                    <div class="icon">
+                        <i class="fas fa-ship"></i>
+                    </div>
+                    <p>Jadwal Kapal</p>
+                </a>
+                <a href="pendataan_kapal" class="menu-item">
+                    <div class="icon">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <p>Pendataan Kapal</p>
+                </a>
+            <?php endif; ?>
+
+            <?php if ($_SESSION['level'] == 'admin' || $_SESSION['level'] == 'petugas gudang'): ?>
+                <a href="aktivitas_bongkar_muat" class="menu-item">
+                    <div class="icon">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <p>Aktivitas Bongkar Muat</p>
+                </a>
+                <a href="manajemen_gudang" class="menu-item">
+                    <div class="icon">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <p>Manajemen Gudang</p>
+                </a>
+            <?php endif; ?>
         </div>
         <div class="visualization">
             <h2>Visualisasi Data Gudang</h2>
@@ -67,20 +81,36 @@
         <div class="content">
             <div class="summary">
                 <div class="summary-item">
-                    <h3><?php echo $operasional['kapal']; ?></h3>
-                    <p>Kapal Beroperasi</p>
+                    <div class="summary-text">
+                        <h3><?php echo $operasional['kapal']; ?></h3>
+                        <p>Kapal Beroperasi</p>
+                        <p class="change text-danger">-10% dari bulan lalu</p>
+                    </div>
+                    <img src="path/to/kapal-icon.png" alt="Icon Kapal">
                 </div>
                 <div class="summary-item">
-                    <h3><?php echo $operasional['gudang']; ?></h3>
-                    <p>Gudang Tersedia</p>
+                    <div class="summary-text">
+                        <h3><?php echo $operasional['gudang']; ?></h3>
+                        <p>Gudang Tersedia</p>
+                        <p class="change text-success">+2% dari bulan lalu</p>
+                    </div>
+                    <img src="path/to/gudang-icon.png" alt="Icon Gudang">
                 </div>
                 <div class="summary-item">
-                    <h3><?php echo $operasional['user']; ?></h3>
-                    <p>User Beroperasi</p>
+                    <div class="summary-text">
+                        <h3><?php echo $operasional['user']; ?></h3>
+                        <p>User Beroperasi</p>
+                        <p class="change text-danger">-1 dari bulan lalu</p>
+                    </div>
+                    <img src="path/to/user-icon.png" alt="Icon User">
                 </div>
                 <div class="summary-item">
-                    <h3><?php echo $operasional['logistik']; ?></h3>
-                    <p>Barang Tersimpan</p>
+                    <div class="summary-text">
+                        <h3><?php echo $operasional['logistik']; ?></h3>
+                        <p>Barang Tersimpan</p>
+                        <p class="change text-success">+20% dari bulan lalu</p>
+                    </div>
+                    <img src="path/to/logistik-icon.png" alt="Icon Barang">
                 </div>
             </div>
             <div class="ship-status">
