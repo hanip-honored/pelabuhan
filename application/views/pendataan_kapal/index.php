@@ -73,15 +73,16 @@
                                     <p>Kapasitas: <?php echo $ship->kapasitas_muatan; ?> TEU</p>
                                 </div>
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-warning btn-sm mb-2" 
+                                    <a href="#" class="btn-action btn-edit" 
                                         data-bs-toggle="modal" 
                                         data-bs-target="#editModal" 
-                                        onclick="setEditData(<?php echo htmlspecialchars(json_encode($ship), ENT_QUOTES, 'UTF-8'); ?>)">
+                                        onclick="setEditData(<?php echo htmlspecialchars(json_encode($ship), ENT_QUOTES, 'UTF-8'); ?>)" title="Edit">
                                         <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button data-href="pendataan_kapal/hapus/<?php echo $ship->id_kapal ?>" class="btn btn-danger btn-sm hapusButton">
+                                    </a>
+                                    <a href="#" data-href="pendataan_kapal/hapus/<?php echo $ship->id_kapal ?>" 
+                                       class="btn-action btn-delete hapusButton" title="Hapus">
                                         <i class="fas fa-trash"></i>
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
