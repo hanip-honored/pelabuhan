@@ -16,7 +16,6 @@
     <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
 </head>
 <body>
-    <?php $this->load->view('sidebar'); ?>
     <div class="main-content">
         <div class="container mt-5">
             <h1 class="text-center mb-4">Manajemen Gudang</h1>
