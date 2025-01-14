@@ -13,52 +13,46 @@
 <body>
     <div class="container">
         <div class="header">
-            <img alt="Profile picture" src="<?php echo base_url('assets/images/users/admin.png'); ?>"/>
-            <div class="location">
-            <h2 id="location" class="text-muted">City, Country</h2>
-            <p id="day" class="text-secondary">Day</p>
-            </div>
-            <div class="weather-icon">
-            <img id="weather-icon" src="" alt="Weather Icon" style="width: 100px; height: 70px;">
-            </div>
-            <div class="weather">
-                <p id="wind-speed"></p>
-                <p id="pressure"></p>
-                <p id="wind-direction"></p>
+            <img alt="Profile picture" src="<?php echo base_url('assets/images/users/admin.png'); ?>" />
+            <div class="location-weather">
+                <div class="location">
+                    <h2 id="location" class="text-muted">City, Country</h2>
+                    <p id="day" class="text-secondary">Day</p>
+                </div>
+                <div class="weather-icon">
+                    <img id="weather-icon" src="" alt="Weather Icon" />
+                </div>
+                <div class="weather">
+                    <p id="temperature">30°</p>
+                    <p id="weather-description">Lembab, berawan</p>
+                </div>
             </div>
         </div>
         <div class="menu">
-    <!-- Link ke halaman Jadwal Kapal -->
-    <a href="<?php echo site_url('jadwal_kapal'); ?>" class="menu-item">
-        <div class="icon">
-            <i class="fas fa-ship"></i>
-        </div>
-        <p>Jadwal Kapal</p>
-    </a>
-
-    <!-- Link ke halaman Pendataan Kapal -->
-    <a href="pendataan_kapal" class="menu-item">
-        <div class="icon">
-            <i class="fas fa-clipboard-list"></i>
-        </div>
-        <p>Pendataan Kapal</p>
-    </a>
-
-    <!-- Link ke halaman Aktivitas Bongkar Muat -->
-    <a href="aktivitas_bongkar_muat" class="menu-item">
-        <div class="icon">
-            <i class="fas fa-boxes"></i>
-        </div>
-        <p>Aktivitas Bongkar Muat</p>
-    </a>
-
-    <!-- Link ke halaman Manajemen Gudang -->
-    <a href="manajemen_gudang" class="menu-item">
-        <div class="icon">
-            <i class="fas fa-warehouse"></i>
-        </div>
-        <p>Manajemen Gudang</p>
-    </a>
+            <a href="<?php echo site_url('jadwal_kapal'); ?>" class="menu-item">
+                <div class="icon">
+                    <i class="fas fa-ship"></i>
+                </div>
+                <p>Jadwal Kapal</p>
+            </a>
+            <a href="pendataan_kapal" class="menu-item">
+                <div class="icon">
+                    <i class="fas fa-clipboard-list"></i>
+                </div>
+                <p>Pendataan Kapal</p>
+            </a>
+            <a href="aktivitas_bongkar_muat" class="menu-item">
+                <div class="icon">
+                    <i class="fas fa-boxes"></i>
+                </div>
+                <p>Aktivitas Bongkar Muat</p>
+            </a>
+            <a href="manajemen_gudang" class="menu-item">
+                <div class="icon">
+                    <i class="fas fa-warehouse"></i>
+                </div>
+                <p>Manajemen Gudang</p>
+            </a>
         </div>
         <div class="visualization">
             <h2>Visualisasi Data Gudang</h2>
