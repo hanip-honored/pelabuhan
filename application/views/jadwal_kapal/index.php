@@ -19,11 +19,11 @@
                 <button class="btn-close" onclick="window.location.href='<?php echo site_url('dashboard'); ?>'"></button>
                 <button class="btn-add" onclick="window.location.href='<?php echo site_url('jadwal_kapal/tambah'); ?>'">Tambah Jadwal</button>
                 <form action="jadwal_kapal" method="get">
-                <div class="search-container">
-                    <input type="text" id="keywordInput" name="keyword" class="form-control" placeholder="Cari Data..." oninput="inputSearch()" value="<?php echo isset($keyword) ? $keyword : ''; ?>">
-                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
+                    <div class="search-container">
+                        <input type="text" id="keywordInput" name="keyword" class="form-control" placeholder="Cari Data..." oninput="inputSearch()" value="<?php echo isset($keyword) ? $keyword : ''; ?>">
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
             </div>
 
             <?php if ($this->session->flashdata('success')): ?>
