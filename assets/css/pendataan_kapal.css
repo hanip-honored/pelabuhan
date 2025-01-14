@@ -76,3 +76,17 @@ h1 {
     display: flex;
     align-items: center;
 }
+
+.card-details {
+    position: relative;
+    padding-right: 60px; /* Ruang untuk tombol di sebelah kanan */
+}
+
+.card-details .btn-group {
+    position: absolute;
+    right: 20px;
+    top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
