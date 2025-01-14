@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manajemen Gudang</title>
-    <link rel="stylesheet" href="<?php echo base_url('assets/css/manajemen_gudang.css'); ?>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -12,17 +11,19 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/manajemen_gudang.css'); ?>">
 </head>
 <body>
-<div class="main-container">
+    <div class="main-container">
         <div class="container">
             <h2>Manajemen Gudang</h2>
             <div class="header">
                 <button class="btn-close" onclick="window.location.href='<?php echo site_url('dashboard'); ?>'"></button>
                 <button class="btn-add" data-bs-toggle="modal" data-bs-target="#tambahModal">Tambah Gudang</button>
-                <form action="menajemen_gudang" method="get">
+
+                <form action="jadwal_kapal" method="get">
                     <div class="search-container">
                         <input type="text" id="keywordInput" name="keyword" class="form-control" placeholder="Cari Data..." oninput="inputSearch()" value="<?php echo isset($keyword) ? $keyword : ''; ?>">
                         <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
@@ -112,7 +113,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="tambahModalLabel">Tambah Gudang</h5>
-                    <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i>
                 </div>
                 <div class="modal-body">
                     <form id="tambahForm" action="manajemen_gudang/tambah_gudang" method="post">
@@ -151,7 +152,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editModalLabel">Edit Gudang</h5>
-                    <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i>
                 </div>
                 <div class="modal-body">
                     <form id="editForm" action="manajemen_gudang/updateGudangLogistik" method="post">

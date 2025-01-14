@@ -84,7 +84,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="tambahModalLabel">Tambah Logistik</h5>
-                <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i>
             </div>
             <div class="modal-body">
                 <form id="tambahForm" action="manajemen_gudang/tambah_logistik" method="post">
@@ -127,7 +127,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editModalLabel">Edit Logistik</h5>
-                <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i>
             </div>
             <div class="modal-body">
                 <form id="editForm" action="manajemen_gudang/updateLogistik" method="post">
