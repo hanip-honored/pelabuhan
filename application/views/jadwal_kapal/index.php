@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/jadwal_kapal.css'); ?>">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <div class="main-container">
@@ -21,6 +22,25 @@
             </div>
         </form>
         </div>
+
+        <?php if ($this->session->flashdata('success')): ?>
+                <script>
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Berhasil',
+                        text: '<?php echo $this->session->flashdata('success'); ?>'
+                    });
+                </script>
+            <?php endif; ?>
+            <?php if ($this->session->flashdata('error')): ?>
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal',
+                        text: '<?php echo $this->session->flashdata('error'); ?>'
+                    });
+                </script>
+            <?php endif; ?>
 
         <div class="table-responsive">
             <table class="table">
@@ -66,9 +86,9 @@
                         <a href="<?php echo site_url('jadwal_kapal/edit/' . $jadwal->id_alur); ?>" class="btn btn-warning btn-sm" title="Edit Jadwal">
                             <i class="fas fa-edit"></i>
                         </a>
-                        <a href="#" class="btn btn-danger btn-sm hapusButton" data-href="<?php echo site_url('jadwal_kapal/hapus/' . $jadwal->id_alur); ?>" title="Hapus Jadwal">
+                        <button data-href="jadwal_kapal/hapus/<?php echo $jadwal->id_alur?>" class="btn btn-danger btn-sm hapusButton">
                             <i class="fas fa-trash"></i>
-                        </a>
+                        </button>
                         </td>
                     </tr>
                     <?php $no++; endforeach; ?>
@@ -81,5 +101,6 @@
             </table>
         </div>
     </div>
+    <script src="<?php echo base_url('assets/js/jadwal_kapal.js'); ?>" defer></script>  
 </body>
 </html>
