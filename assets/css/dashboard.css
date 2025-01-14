@@ -218,6 +218,11 @@ body {
 .ship-status th {
     background-color: #f5f5f5;
     font-weight: 700;
+    text-align: right;
+}
+
+.ship-status th.nama-kapal {
+    text-align: left;
 }
 
 .ship-status td.status {
@@ -226,12 +231,15 @@ body {
 
 .status.keluar {
     color: red;
+    font-weight: bold;
 }
 
 .status.masuk {
     color: green;
+    font-weight: bold;
 }
 
-.status.sedang-bongkar {
+.status.sedang-bongkar-muat {
     color: orange;
+    font-weight: bold;
 }

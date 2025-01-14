@@ -27,6 +27,9 @@
                     <p id="weather-description">Lembab, berawan</p>
                 </div>
             </div>
+            <a href="logout" style="color: red; text-decoration: none;">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
         </div>
         <div class="menu">
             <?php if ($_SESSION['level'] == 'admin'): ?>
@@ -86,7 +89,7 @@
                         <p>Kapal Beroperasi</p>
                         <p class="change text-danger">-10% dari bulan lalu</p>
                     </div>
-                    <img src="path/to/kapal-icon.png" alt="Icon Kapal">
+                    <img src="<?php echo base_url('assets/images/kapal.png'); ?>" alt="Icon Kapal">
                 </div>
                 <div class="summary-item">
                     <div class="summary-text">
@@ -94,7 +97,7 @@
                         <p>Gudang Tersedia</p>
                         <p class="change text-success">+2% dari bulan lalu</p>
                     </div>
-                    <img src="path/to/gudang-icon.png" alt="Icon Gudang">
+                    <img src="<?php echo base_url('assets/images/gudang.png'); ?>" alt="Icon Gudang">
                 </div>
                 <div class="summary-item">
                     <div class="summary-text">
@@ -102,7 +105,7 @@
                         <p>User Beroperasi</p>
                         <p class="change text-danger">-1 dari bulan lalu</p>
                     </div>
-                    <img src="path/to/user-icon.png" alt="Icon User">
+                    <img src="<?php echo base_url('assets/images/user.png'); ?>" alt="Icon User">
                 </div>
                 <div class="summary-item">
                     <div class="summary-text">
@@ -110,7 +113,7 @@
                         <p>Barang Tersimpan</p>
                         <p class="change text-success">+20% dari bulan lalu</p>
                     </div>
-                    <img src="path/to/logistik-icon.png" alt="Icon Barang">
+                    <img src="<?php echo base_url('assets/images/gudang.png'); ?>" alt="Icon Barang">
                 </div>
             </div>
             <div class="ship-status">
