@@ -16,22 +16,19 @@
     <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="main-content">
-        <div class="container mt-5">
-            <h1 class="text-center mb-4">Manajemen Gudang</h1>
-
-            <a href="#" id="tambahButton" class="btn btn-success mb-3" 
-                data-bs-toggle="modal" 
-                data-bs-target="#tambahModal">
-                <i class="fas fa-plus"></i> Tambah Gudang
-            </a>
-
-            <form action="manajemen_gudang" method="get" class="mb-3">
-                <div class="input-group">
-                    <input type="text" id="keywordInput" name="keyword" class="form-control" placeholder="Cari data..." oninput="checkInput()" value="<?php echo isset($keyword) ? $keyword : ''; ?>">
-                    <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Cari</button>
-                </div>
-            </form>
+<div class="main-container">
+        <div class="container">
+            <h2>Manajemen Gudang</h2>
+            <div class="header">
+                <button class="btn-close" onclick="window.location.href='<?php echo site_url('dashboard'); ?>'"></button>
+                <button class="btn-add" data-bs-toggle="modal" data-bs-target="#tambahModal">Tambah Gudang</button>
+                <form action="menajemen_gudang" method="get">
+                    <div class="search-container">
+                        <input type="text" id="keywordInput" name="keyword" class="form-control" placeholder="Cari Data..." oninput="inputSearch()" value="<?php echo isset($keyword) ? $keyword : ''; ?>">
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
 
             <!-- Pesan Sukses atau Error -->
             <?php if ($this->session->flashdata('success')): ?>
@@ -53,56 +50,57 @@
                 </script>
             <?php endif; ?>
 
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Lokasi Gudang</th>
-                        <th>Kapasitas Maksimal</th>
-                        <th>Total Terisi</th>
-                        <th>Sisa Kapasitas</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $no = 1; 
-                        if (!empty($gudang_data)): ?>
-                        <?php foreach ($gudang_data as $gudang): ?>
-                            <?php if ($gudang->total_terisi == $gudang->kapasitas_gudang) {
-                                $status = 'penuh';
-                            } else {
-                                $status = 'tersedia';
-                            }?>
-                            <tr>
-                                <td><?php echo $no;?></td>
-                                <td><?php echo $gudang->lokasi_gudang; ?></td>
-                                <td><?php echo $gudang->kapasitas_gudang; ?></td>
-                                <td><?php echo $gudang->total_terisi; ?></td>
-                                <td><?php echo $gudang->sisa_kapasitas; ?></td>
-                                <td><?php echo $status; ?></td>
-                                <td>
-                                    <a href="#" id="editButton" class="btn btn-warning btn-sm" 
-                                        data-bs-toggle="modal" 
-                                        data-bs-target="#editModal" 
-                                        onclick="setEditData(<?php echo htmlspecialchars(json_encode($gudang), ENT_QUOTES, 'UTF-8'); ?>)">
-                                        <i class="fas fa-edit"></i>
-                                        Edit
-                                    </a>
-                                    <button data-href="manajemen_gudang/hapus_gudang/<?php echo $gudang->id_gudang?>" class="btn btn-danger btn-sm hapusButton">
-                                        <i class="fas fa-trash"></i> Hapus
-                                    </button>
-                                </td>
-                            </tr>
-                            <?php $no++; ?>
-                        <?php endforeach; ?>
-                    <?php else: ?>
+            <div class="table-respopnsive">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td colspan="7" class="text-center">Tidak ada data gudang tersedia.</td>
+                            <th>No</th>
+                            <th>Lokasi Gudang</th>
+                            <th>Kapasitas Maksimal</th>
+                            <th>Total Terisi</th>
+                            <th>Sisa Kapasitas</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
                         </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php $no = 1; 
+                            if (!empty($gudang_data)): ?>
+                            <?php foreach ($gudang_data as $gudang): ?>
+                                <?php if ($gudang->total_terisi == $gudang->kapasitas_gudang) {
+                                    $status = 'penuh';
+                                } else {
+                                    $status = 'tersedia';
+                                }?>
+                                <tr>
+                                    <td><?php echo $no;?></td>
+                                    <td><?php echo $gudang->lokasi_gudang; ?></td>
+                                    <td><?php echo $gudang->kapasitas_gudang; ?></td>
+                                    <td><?php echo $gudang->total_terisi; ?></td>
+                                    <td><?php echo $gudang->sisa_kapasitas; ?></td>
+                                    <td><?php echo $status; ?></td>
+                                    <td>
+                                        <a href="#" id="editButton" class="btn btn-warning btn-sm" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#editModal" 
+                                            onclick="setEditData(<?php echo htmlspecialchars(json_encode($gudang), ENT_QUOTES, 'UTF-8'); ?>)">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <button data-href="manajemen_gudang/hapus_gudang/<?php echo $gudang->id_gudang?>" class="btn btn-danger btn-sm hapusButton">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <?php $no++; ?>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="7" class="text-center">Tidak ada data gudang tersedia.</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <?php  $this->load->view('manajemen_gudang/logistik.php'); ?>
@@ -114,7 +112,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="tambahModalLabel">Tambah Gudang</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="tambahForm" action="manajemen_gudang/tambah_gudang" method="post">
@@ -153,7 +151,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="editModalLabel">Edit Gudang</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close-custom" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="editForm" action="manajemen_gudang/updateGudangLogistik" method="post">
