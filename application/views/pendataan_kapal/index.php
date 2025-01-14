@@ -25,7 +25,7 @@
 
         <form action="pendataan_kapal" method="get" class="mb-3">
             <div class="input-group">
-                <input type="text" id="keywordInput" name="keyword" class="form-control" placeholder="Cari Data..." value="<?php echo isset($keyword) ? $keyword : ''; ?>">
+                <input type="text" id="keywordInput" name="keyword" class="form-control" placeholder="Cari Data..." oninput="searchKapal()"value="<?php echo isset($keyword) ? $keyword : ''; ?>">
                 <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Cari</button>
             </div>
         </form>
@@ -94,6 +94,51 @@
         </div>
     </div>
 
+    <!-- Modal Tambah -->
+    <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tambahModalLabel">Tambah Data Kapal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="pendataan_kapal/tambah_aksi" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="nama_kapal" class="form-label">Nama Kapal</label>
+                            <input type="text" class="form-control" id="nama_kapal" name="nama_kapal" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="jenis_kapal" class="form-label">Jenis Kapal</label>
+                            <input type="text" class="form-control" id="jenis_kapal" name="jenis_kapal" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ukuran_kapal" class="form-label">Ukuran Kapal (M)</label>
+                            <input type="number" class="form-control" id="ukuran_kapal" name="ukuran_kapal" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="kapasitas_muatan" class="form-label">Kapasitas Muatan (TEU)</label>
+                            <input type="number" class="form-control" id="kapasitas_muatan" name="kapasitas_muatan" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="status_kapal" class="form-label">Status Kapal</label>
+                            <select class="form-select" id="status_kapal" name="status_kapal" required>
+                                <option value="Masuk">Masuk</option>
+                                <option value="Keluar">Keluar</option>
+                                <option value="Sedang bongkar muat">Sedang bongkar muat</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="gambar_kapal" class="form-label">Gambar Kapal</label>
+                            <input type="file" class="form-control" id="gambar_kapal" name="gambar_kapal" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Tambah Kapal</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal Edit -->
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -105,6 +150,7 @@
                 <div class="modal-body">
                     <form id="editForm" action="pendataan_kapal/edit_aksi" method="post" enctype="multipart/form-data">
                         <input type="hidden" id="edit_id_kapal" name="id_kapal">
+                        <input type="hidden" id="old_gambar_kapal" name="old_gambar_kapal">
                         <div class="mb-3">
                             <label for="edit_nama_kapal" class="form-label">Nama Kapal</label>
                             <input type="text" class="form-control" id="edit_nama_kapal" name="nama_kapal" required>
@@ -144,6 +190,13 @@
     </div>
 
     <script>
+        function searchKapal() {
+            const keywordInput = document.getElementById('keywordInput');
+            if (keywordInput.value.trim() === '') {
+                window.location.href = 'pendataan_kapal';
+            }
+        }
+
         function toggleCard(card) {
             const details = card.querySelector('.card-details');
             const icon = card.querySelector('.toggle-icon');
@@ -165,6 +218,7 @@
             document.getElementById('edit_ukuran_kapal').value = ship.ukuran_kapal;
             document.getElementById('edit_kapasitas_muatan').value = ship.kapasitas_muatan;
             document.getElementById('edit_status_kapal').value = ship.status_kapal;
+            document.getElementById('old_gambar_kapal').value = ship.gambar_kapal;
             document.getElementById('edit_preview_gambar').src = base_url + 'assets/images/ships/' + ship.gambar_kapal;
         }
 

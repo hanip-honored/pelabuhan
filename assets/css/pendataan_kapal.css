@@ -3,6 +3,11 @@ body {
     background-color: #f9f9f9;
     margin: 0;
     padding: 0;
+    background-image: url('../images/background.png');
+    background-size: cover; /* Agar gambar menutupi seluruh background */
+    background-repeat: no-repeat; /* Jangan ulangi gambar */
+    background-attachment: fixed; /* Agar gambar tetap di tempat saat scroll */
+    background-position: center; /* Posisikan gambar di tengah */
 }
 
 .container {
