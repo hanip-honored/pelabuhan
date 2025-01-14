@@ -1,66 +1,149 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f9;
-  }
-  .container {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  h1 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  table {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8fafc;
+  margin: 0;
+  padding: 0;
+}
+
+.main-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.btn-close {
+  width: 40px;
+  height: 40px;
+  background-color: #ff6b6b;
+  border: none;
+  border-radius: 50%;
+  font-size: 18px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-add {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: block;
+  margin-left: 200px;
+}
+
+.btn-add:hover {
+  background-color: #e65555;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  width: 300px;
+}
+
+.search-container input {
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-size: 14px;
+  flex: 1;
+}
+
+.search-container button {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  border: none;
+}
+
+.table thead th {
+  font-size: 16px;
+  text-align: left;
+  padding: 10px;
+  border-bottom: none;
+}
+
+.table tbody tr {
+  border: none;
+}
+
+.table td {
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+}
+
+/* Warna status alur */
+.status-dijadwalkan {
+  background-color: #28a745; /* Hijau */
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+}
+
+.status-proses {
+  background-color: #ffc107; /* Kuning */
+  color: black;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+}
+
+.status-selesai {
+  background-color: #007bff; /* Biru */
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .table {
     width: 100%;
-    border-collapse: collapse;
   }
-  th, td {
+
+  .search-container {
+    width: 100%;
+  }
+
+  .btn-add {
+    width: 100%;
     text-align: center;
-    padding: 10px;
-    border: 1px solid #ddd;
   }
-  th {
-    background-color: #f9fafb;
-    font-weight: bold;
-  }
-  .time-slot {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 5px;
-  }
-  .time-slot input[type="time"] {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    margin-right: 10px;
-  }
-  .time-slot button {
-    padding: 5px 10px;
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-  .time-slot button:hover {
-    background-color: #c82333;
-  }
-  .add-time {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  .add-time:hover {
-    background-color: #0056b3;
-  }
+}
