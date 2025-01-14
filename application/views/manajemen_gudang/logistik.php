@@ -132,11 +132,11 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="editForm" action="aktivitas_bongkar_muat/updateAktivitas" method="post">
+                <form id="editForm" action="manajemen_gudang/updateLogistik" method="post">
                     <input type="hidden" id="edit_id_logistik" name="id_logistik">
                     <div class="mb-3">
                         <label for="edit_kapal" class="form-label">Nama Kapal</label>
-                        <select class="form-control" name="edit_kapal" id="edit_kapal" required>
+                        <select class="form-control" name="kapal" id="edit_kapal" required>
                             <option value="" disabled selected>Pilih Kapal</option>
                             <?php foreach ($kapal as $kap): ?>
                                 <option value="<?php echo $kap->id_kapal; ?>"><?php echo $kap->nama_kapal; ?></option>
@@ -145,15 +145,15 @@
                     </div>
                     <div class="mb-3">
                         <label for="edit_jenis_barang" class="form-label">Jenis Barang</label>
-                        <input type="text" class="form-control" id="edit_jenis_barang" name="edit_jenis_barang" required>
+                        <input type="text" class="form-control" id="edit_jenis_barang" name="jenis_barang" required>
                     </div>
                     <div class="mb-3">
                         <label for="edit_jumlah_barang" class="form-label">Jumlah Barang</label>
-                        <input type="text" class="form-control" id="edit_jumlah_barang" name="edit_jumlah_barang" required>
+                        <input type="text" class="form-control" id="edit_jumlah_barang" name="jumlah_barang" required>
                     </div>
                     <div class="mb-3">
                         <label for="edit_status_logistik" class="form-label">Status Logistik</label>
-                        <select class="form-control" name="edit_status_logistik" id="edit_status_logistik" required>
+                        <select class="form-control" name="status_logistik" id="edit_status_logistik" required>
                             <option value="" disabled selected>Pilih Status</option>
                             <option value="dimuat">Dimuat</option>
                             <option value="dibongkar">Dibongkar</option>

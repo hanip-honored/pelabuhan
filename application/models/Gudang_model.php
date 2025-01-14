@@ -132,4 +132,9 @@ class Gudang_model extends CI_Model {
         $this->db->where('id_logistik', $id_logistik);
         return $this->db->delete('logistik');
     }
+
+    public function updateLogistik($id_logistik, $data) {
+        $this->db->where('id_logistik', $id_logistik);
+        return $this->db->update('logistik', $data);
+    }
 }

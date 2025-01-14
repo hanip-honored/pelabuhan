@@ -117,9 +117,9 @@ class Manajemen_Gudang extends CI_Controller {
 
     public function hapusLogistik($id_logistik) {
         if ($this->Gudang_model->deleteLogistik($id_logistik)) {
-            $this->session->set_flashdata('success', 'Data berhasil ditambahkan.');
+            $this->session->set_flashdata('success', 'Data berhasil dihapus.');
         } else {
-            $this->session->set_flashdata('error', 'Gagal menambahkan data.');
+            $this->session->set_flashdata('error', 'Gagal menghapus data.');
         }
         redirect('manajemen_gudang');
     }
@@ -127,5 +127,22 @@ class Manajemen_Gudang extends CI_Controller {
     public function getKapalLogistik($id_kapal) {
         $kapal = $this->Gudang_model->getKapalLogistik($id_kapal);
         echo json_encode($kapal);
+    }
+
+    public function updateLogistik() {
+        $id_logistik = $this->input->post('id_logistik');
+        $data = [
+            'id_kapal' => $this->input->post('kapal'),
+            'jenis_barang' => $this->input->post('jenis_barang'),
+            'jumlah_barang' => $this->input->post('jumlah_barang'),
+            'status_logistik' => $this->input->post('status_logistik'),
+        ];
+
+        if ($this->Gudang_model->updateLogistik($id_logistik, $data)) {
+            $this->session->set_flashdata('success', 'Data berhasil diperbarui.');
+        } else {
+            $this->session->set_flashdata('error', 'Gagal memperbarui data.');
+        }
+        redirect('manajemen_gudang');
     }
 }
