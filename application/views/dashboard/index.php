@@ -113,7 +113,7 @@
                         <p>Barang Tersimpan</p>
                         <p class="change text-success">+20% dari bulan lalu</p>
                     </div>
-                    <img src="<?php echo base_url('assets/images/gudang.png'); ?>" alt="Icon Barang">
+                    <img src="<?php echo base_url('assets/images/logistik.png'); ?>" alt="Icon Barang">
                 </div>
             </div>
             <div class="ship-status">
