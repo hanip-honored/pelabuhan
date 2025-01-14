@@ -13,7 +13,6 @@ body {
 .header {
     display: flex;
     align-items: center;
-    justify-content: center; /* Pusatkan semua elemen di header */
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
@@ -24,8 +23,6 @@ body {
     border-radius: 50%;
     width: 80px;
     height: 80px;
-    position: absolute;
-    left: 20px;
 }
 
 .location-weather {
@@ -33,6 +30,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 20px;
+    flex: 1; /* Mengisi ruang di tengah */
 }
 
 .location {
@@ -43,13 +41,13 @@ body {
     margin: 0;
     font-size: 24px;
     font-weight: 700;
-    color: #333;
+    color: #762222;
 }
 
 .location p {
     margin: 5px 0;
     font-size: 16px;
-    color: #888;
+    color: #762222;
 }
 
 .weather-icon img {
@@ -61,15 +59,10 @@ body {
     text-align: center;
 }
 
-.header .weather {
-    text-align: left;
-    margin-left: auto; 
-}
-
 .header .weather p {
     margin: 5px 0;
     font-size: 16px;
-    color: #333;
+    color: #762222;
 }
 
 .menu {
@@ -80,6 +73,7 @@ body {
 
 .menu .menu-item {
     text-align: center;
+    text-decoration: none;
 }
 
 .menu .menu-item .icon {
@@ -101,7 +95,8 @@ body {
 .menu .menu-item p {
     margin: 10px 0 0;
     font-size: 14px;
-    color: #333;
+    color: #762222;
+    font-weight: bold;
 }
 
 .visualization {
