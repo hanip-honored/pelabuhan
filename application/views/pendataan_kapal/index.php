@@ -16,6 +16,7 @@
 </head>
 <body>
     <div class="container mt-5">
+        <button class="btn-close" onclick="window.location.href='<?php echo site_url('dashboard'); ?>'"></button>
         <h1 class="text-center mb-4">Pendataan Kapal</h1>
         <a href="#" id="tambahButton" class="btn btn-success mb-3" 
                 data-bs-toggle="modal" 
