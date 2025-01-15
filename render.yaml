@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: codeigniter-app
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: CI_ENV
+        value: production

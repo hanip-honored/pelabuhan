@@ -1,0 +1,20 @@
+# Menggunakan image resmi PHP 7.4 dengan Apache
+FROM php:7.4-apache
+
+# Menyalin semua file project ke direktori kerja di dalam container
+COPY . /var/www/html
+
+# Mengatur direktori kerja di container
+WORKDIR /var/www/html
+
+# Mengaktifkan modul rewrite Apache yang dibutuhkan CodeIgniter
+RUN a2enmod rewrite
+
+# Memberikan izin kepada Apache untuk menulis di folder tertentu (contoh: cache dan logs)
+RUN chown -R www-data:www-data /var/www/html/application/cache /var/www/html/application/logs
+
+# Menyalin file konfigurasi .htaccess jika ada
+COPY .htaccess /var/www/html/.htaccess
+
+# Menjalankan Apache ketika container dijalankan
+CMD ["apache2-foreground"]
